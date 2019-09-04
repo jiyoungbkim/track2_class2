@@ -78,7 +78,7 @@ public class CarRent_DAO {
 
 	public ArrayList<CarRent_DTO> getCarRentList(String gubun, String search) {
 		ArrayList<CarRent_DTO> arrR = new ArrayList<CarRent_DTO>();
-		String query = " select r.rent_id,r.car_id,m.name,nvl(r.driving_km,'0'),to_char(r.rent_start_date,'yyyy-MM-dd'),\r\n"
+		String query = " select r.rent_id,i.car_name,m.name,nvl(r.driving_km,'0'),to_char(r.rent_start_date,'yyyy-MM-dd'),\r\n"
 				+ "decode(r.rent_return_date,'','[미반납]','[반납]') as rent_return_date,i.status\r\n"
 				+ "from a20_track2_carrent r, a20_track2_carinfo i, a20_track2_member m\r\n"
 				+ "where r.car_id = i.car_id\r\n" + "and r.member_id = m.id ";
@@ -96,13 +96,13 @@ public class CarRent_DAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				String rent_id = rs.getString(1);
-				String car_id = rs.getString(2);
+				String car_name = rs.getString(2);
 				String member_id = rs.getString(3);
 				String driving_km = rs.getString(4);
 				String rent_start_date = rs.getString(5);
 				String rent_return_date = rs.getString(6);
 
-				dto = new CarRent_DTO(rent_id, car_id, member_id, driving_km, rent_start_date, rent_return_date);
+				dto = new CarRent_DTO(rent_id, car_name, member_id, driving_km, rent_start_date, rent_return_date);
 				arrR.add(dto);
 			}
 		} catch (RemoteException re) {
@@ -122,11 +122,12 @@ public class CarRent_DAO {
 	}
 
 	public CarRent_DTO getCarRentInfo(String id) {
-		String query = "select rent_id,car_id,member_id,nvl(driving_km,'0'),to_char(rent_start_date,'yyyy-MM-dd'),\r\n"
-				+ "decode(rent_return_date,'','[미반납]','[반납]') as rent_return_date\r\n" + 
-				"from a20_track2_carrent "+ 
-				"where rent_id = '" + id + "' "+ 
-				" order by car_id desc";
+		String query = "select r.rent_id,i.car_name,m.name,nvl(r.driving_km,'0'),to_char(r.rent_start_date,'yyyy-MM-dd'),\r\n" + 
+				"decode(r.rent_return_date,'','[미반납]','[반납]') as rent_return_date,i.status\r\n" + 
+				"from a20_track2_carrent r, a20_track2_carinfo i, a20_track2_member m\r\n" + 
+				"where r.car_id = i.car_id\r\n" + 
+				"and r.member_id = m.id "
+				+ "and rent_id = '"+id+"' ";
 		// System.out.println(query);
 		CarRent_DTO dto = null;
 		try {
@@ -135,13 +136,13 @@ public class CarRent_DAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				String rent_id = rs.getString(1);
-				String car_id = rs.getString(2);
+				String car_name = rs.getString(2);
 				String member_id = rs.getString(3);
 				String driving_km = rs.getString(4);
 				String rent_start_date = rs.getString(5);
 				String rent_return_date = rs.getString(6);
 
-				dto = new CarRent_DTO(rent_id, car_id, member_id, driving_km, rent_start_date, rent_return_date);
+				dto = new CarRent_DTO(rent_id, car_name, member_id, driving_km, rent_start_date, rent_return_date);
 			}
 		} catch (RemoteException re) {
 			System.out.println("RemoteException getCarList" + re.getMessage());

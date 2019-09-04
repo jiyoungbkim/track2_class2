@@ -46,11 +46,11 @@ public class CarReturn {
 					System.out.println("반납할 목록이 없습니다.");
 				} else {
 					System.out.println(CommonUtil.getRPad("", 62, "="));
-					System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+					System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 					System.out.println(CommonUtil.getRPad("", 62, "-"));
 					for (int k = 0; k < arrR.size(); k++) {
 						System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getRent_id()) + "\t");
-						System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getCar_id()) + "\t");
+						System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getCar_name()) + "\t");
 						System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getMember_id()) + "\t");
 						System.out.print(String
 								.valueOf(CommonUtil.getLPad(
@@ -79,10 +79,10 @@ public class CarReturn {
 								System.out.println("렌트 목록에 없습니다.");
 							} else {
 								System.out.println(CommonUtil.getRPad("", 62, "="));
-								System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+								System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 								System.out.println(CommonUtil.getRPad("", 62, "-"));
 								System.out.print(String.valueOf(dtoR.getRent_id()) + "\t");
-								System.out.print(String.valueOf(dtoR.getCar_id()) + "\t");
+								System.out.print(String.valueOf(dtoR.getCar_name()) + "\t");
 								System.out.print(String.valueOf(dtoR.getMember_id()) + "\t");
 								System.out.print(String.valueOf(
 										CommonUtil.getLPad(String.valueOf(dtoR.getDriving_km()) + "km", 5, " "))
@@ -148,7 +148,7 @@ public class CarReturn {
 			if (gubun != 2) {
 				continue;
 			}
-			String query = " select r.rent_id,r.car_id,m.name,nvl(r.driving_km,'0'),to_char(r.rent_start_date,'yyyy-MM-dd'),  "
+			String query = " select r.rent_id,i.car_name,m.name,nvl(r.driving_km,'0'),to_char(r.rent_start_date,'yyyy-MM-dd'),  "
 					+ "decode(r.rent_return_date,'','[미반납]','[반납]') as rent_return_date,i.status  from a20_track2_carrent r, "
 					+ "a20_track2_carinfo i, a20_track2_member m  where r.rent_id in(select max(rent_id) as rent_id  "
 					+ "from a20_track2_carrent  group by car_id)  and r.car_id = i.car_id  and r.member_id = m.id  "
@@ -159,11 +159,11 @@ public class CarReturn {
 				System.out.println("취소할 목록이 없습니다.");
 			} else {
 				System.out.println(CommonUtil.getRPad("", 62, "="));
-				System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+				System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 				System.out.println(CommonUtil.getRPad("", 62, "-"));
 				for (int k = 0; k < arrR.size(); k++) {
 					System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getRent_id()) + "\t");
-					System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getCar_id()) + "\t");
+					System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getCar_name()) + "\t");
 					System.out.print(String.valueOf(((CarRent_DTO) arrR.get(k)).getMember_id()) + "\t");
 					System.out.print(String
 							.valueOf(CommonUtil.getLPad(
@@ -192,10 +192,10 @@ public class CarReturn {
 							System.out.println("반납 목록에 없습니다.");
 						} else {
 							System.out.println(CommonUtil.getRPad("", 62, "="));
-							System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+							System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 							System.out.println(CommonUtil.getRPad("", 62, "-"));
 							System.out.print(String.valueOf(dtoR.getRent_id()) + "\t");
-							System.out.print(String.valueOf(dtoR.getCar_id()) + "\t");
+							System.out.print(String.valueOf(dtoR.getCar_name()) + "\t");
 							System.out.print(String.valueOf(dtoR.getMember_id()) + "\t");
 							System.out.print(String.valueOf(
 									CommonUtil.getLPad(String.valueOf(dtoR.getDriving_km()) + "km", 5, " ")) + "\t");

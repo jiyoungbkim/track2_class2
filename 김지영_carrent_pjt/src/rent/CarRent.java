@@ -175,16 +175,16 @@ public class CarRent {
 				} while (id.length() != 3 || dtoM == null );
 			}
 			if (gubun == 2) {
-				arrR = daoR.getCarRentList("status", "n");
+				arrR = daoR.getCarRentList("return_date", "");
 				if(arrR.size()==0) {
 					System.out.println("취소할 목록이 없습니다.");
 				} else {
 					System.out.println(util.getRPad("", 62, "="));
-					System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+					System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 					System.out.println(util.getRPad("", 62, "-"));
 					for (int k = 0; k < arrR.size(); k++) {
 						System.out.print(arrR.get(k).getRent_id() + "\t");
-						System.out.print(arrR.get(k).getCar_id() + "\t");
+						System.out.print(arrR.get(k).getCar_name() + "\t");
 						System.out.print(arrR.get(k).getMember_id() + "\t");
 						System.out.print(util.getLPad(arrR.get(k).getDriving_km() + "km", 5, " ")
 								+ "\t");
@@ -210,10 +210,10 @@ public class CarRent {
 								System.out.println("렌트 목록에 없습니다.");
 							} else {
 								System.out.println(util.getRPad("", 62, "="));
-								System.out.println("렌트ID\t\t자동차ID\t회원명\t주행거리\t대여일\t\t반납일");
+								System.out.println("렌트ID\t\t자동차명\t회원명\t주행거리\t대여일\t\t반납일");
 								System.out.println(util.getRPad("", 62, "-"));
 								System.out.print(dtoR.getRent_id() + "\t");
-								System.out.print(dtoR.getCar_id() + "\t");
+								System.out.print(dtoR.getCar_name() + "\t");
 								System.out.print(dtoR.getMember_id() + "\t");
 								System.out.print(util.getLPad(dtoR.getDriving_km() + "km", 5, " ")
 										+ "\t");

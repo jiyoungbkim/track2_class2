@@ -7,17 +7,19 @@ public class CarRent_DTO {
 		super();
 	}
 
-	public CarRent_DTO(String rent_id, String car_id, String member_id, String driving_km, String rent_start_date,
-			String rent_return_date) {
+
+	public CarRent_DTO(String rent_id, String car_name, String member_id, String driving_km,
+			String rent_start_date, String rent_return_date) {
 		super();
 		this.rent_id = rent_id;
-		this.car_id = car_id;
+		this.car_name = car_name;
 		this.member_id = member_id;
 		this.driving_km = driving_km;
 		this.rent_start_date = rent_start_date;
 		this.rent_return_date = rent_return_date;
 	}
 
+	
 	public CarRent_DTO(String rent_id, String car_id, String car_name, String member_id, String driving_km,
 			String rent_start_date, String rent_return_date) {
 		super();
