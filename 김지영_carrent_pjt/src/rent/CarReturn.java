@@ -101,9 +101,10 @@ public class CarReturn {
 									boolean result = true;
 									boolean result2 = true;
 
+									System.out.print("직접입력[1], 오늘날짜[2] : ");
+									int daygubun = sc.nextInt();
 									do {
-										System.out.print("직접입력[1], 오늘날짜[2] : ");
-										int daygubun = sc.nextInt();
+										
 										if (daygubun == 1) {
 											System.out.print("반납 날짜[YYYY-MM-DD] : ");
 											rentDate = sc.next();
@@ -121,6 +122,7 @@ public class CarReturn {
 											result2 = util.checkSRdate(dtoR.getRent_start_date(), rentDate);
 											if (!result2) {
 												System.out.println("오늘이 대여일보다 이전입니다.직접입력하세요.");
+												daygubun = 1;
 											}
 										}
 									} while (!result || !result2);
