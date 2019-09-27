@@ -7,12 +7,13 @@ public class Notice_DTO {
 	public Notice_DTO() {
 		super();
 	}
-	public Notice_DTO(String notice_no, String title, String content, String reg_id, int hit) {
+	public Notice_DTO(String notice_no, String title, String content, String reg_id, String reg_date, int hit) {
 		super();
 		this.notice_no 		= notice_no;
 		this.title 			= title;
 		this.content 		= content;
 		this.reg_id 		= reg_id;
+		this.reg_date 		= reg_date;
 		this.hit 			= hit;
 	}
 	

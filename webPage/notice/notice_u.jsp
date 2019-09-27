@@ -1,5 +1,12 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
+<%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
+<%	
+	request.setCharacterEncoding("UTF-8");	
+	String notice_no = request.getParameter("t_noticeNo");
+	Notice_DAO dao = new Notice_DAO();
+	Notice_DTO dtoN = dao.getNoticeView(notice_no);
+%>
 <div id="con">
 <style>
 #menu_bar ul li i{
@@ -12,6 +19,7 @@
 	border-bottom : #999 1px;
 }
 </style>
+
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -77,10 +85,10 @@ td.title{
 }
 </style>
 <script>
-	function save() {
+	function update() {
 		var fm = document.notice;
 		<!--document.notice.action = "notice_proc.jsp";-->
-		fm.action = "notice_proc.jsp";
+		fm.action = "notice_update.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -91,6 +99,7 @@ td.title{
 			 HOME | COMMUNITY | NOTICE
 		</p>
 		<form name="notice">
+		<input name="t_notice_no" type="hidden" value="<%=notice_no%>">
 		<div class="board_list">
 			<table class="board_table">
 				<colgroup>
@@ -100,17 +109,17 @@ td.title{
 				<thead>
 					<tr>
 						<th>작성자</th>
-						<td><input name="t_reg_id" type="text" size="90%"></td>
+						<td><input name="t_reg_id" value="<%=dtoN.getReg_id()%>" type="text" size="90%"></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td><input name="t_title" type="text" size="90%"></td> <!---->
+						<td><input name="t_title" value="<%=dtoN.getTitle()%>" type="text" size="90%"></td> <!---->
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="t_content" class="textarea"></textarea></td> <!---->
+						<td><textarea name="t_content" class="textarea"><%=dtoN.getContent()%></textarea></td> <!---->
 					</tr>
 				</tbody>
 			</table>			
@@ -118,9 +127,8 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="notice_r.jsp">목 록</a>
-					<!--<a href="notice_proc.jsp?t_title=가가&t_value=bbb">get</a>-->
-					<a href="javascript:save()">등 록</a> <!---->
+					<a href="notice_r.jsp">취 소</a>
+					<a href="javascript:update()">저 장</a> <!---->
 				</p>
 		</div>
 		</form>

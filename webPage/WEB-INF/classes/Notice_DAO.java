@@ -156,7 +156,7 @@ public class Notice_DAO {
 	//게시물 조회
 	public Notice_DTO getNoticeView(String noticeNo){
 
-		String query =" select notice_no, title, content, reg_id, hit "+
+		String query =" select notice_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
 						" from a20_track2_web_notice "+
 						"where notice_no = '"+noticeNo+"' ";
 		Notice_DTO dtoN = null;				
@@ -169,9 +169,10 @@ public class Notice_DAO {
 				String title = rs.getString(2);
 				String content = rs.getString(3);
 				String reg_id = rs.getString(4);
-				int hit = rs.getInt(5);
+				String reg_date = rs.getString(5);
+				int hit = rs.getInt(6);
 				
-				dtoN = new Notice_DTO(notice_no,title,content,reg_id,hit);
+				dtoN = new Notice_DTO(notice_no,title,content,reg_id,reg_date,hit);
 			}
 		} catch(RemoteException me) {
 			System.out.println(" RemoteException getNoticeView(): "+me.getMessage());
@@ -215,5 +216,87 @@ public class Notice_DAO {
 		}
 		return result;			
 	}
-
+	// 글 수정 저장
+	public int updateNotice(String notice_no,String title,String content,String reg_id,String reg_date) {
+		
+		
+		String query = " update a20_track2_web_notice "+
+						" set title = '"+title+"', content = '"+content+"', "+
+						" reg_id = '"+reg_id+"', reg_date = '"+reg_date+"' "+
+						" where notice_no = '"+notice_no+"' ";
+		int result = 0;
+		try {
+			con = common.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+			
+		} catch (RemoteException me){
+			System.out.println(" RemoteException updateNotice(): " + me.getMessage());
+		} catch (SQLException se){
+			System.out.println(" SQLException updateNotice(): " + se.getMessage());
+		} catch (Exception e) {
+			System.out.println(" 오류 : D_2_DAO.updateNotice() ");
+		} finally {
+			try {
+				common.close(con, ps);
+			} catch (Exception e) {
+				System.out.println(" updateNotice close Exception " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	// 글 수정 저장 dto
+	public int updateNotice(Notice_DTO dto) {
+		
+		String query = " update a20_track2_web_notice "+
+						" set title = '"+dto.getTitle()+"', content = '"+dto.getContent()+"', "+
+						" reg_id = '"+dto.getReg_id()+"', reg_date = '"+dto.getReg_date()+"' "+
+						" where notice_no = '"+dto.getNotice_no()+"' ";
+		int result = 0;
+		try {
+			con = common.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+			
+		} catch (RemoteException me){
+			System.out.println(" RemoteException updateNotice(): " + me.getMessage());
+		} catch (SQLException se){
+			System.out.println(" SQLException updateNotice(): " + se.getMessage());
+		} catch (Exception e) {
+			System.out.println(" 오류 : D_2_DAO.updateNotice() ");
+		} finally {
+			try {
+				common.close(con, ps);
+			} catch (Exception e) {
+				System.out.println(" updateNotice close Exception " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	// 글 수정 삭제
+	public int deleteNotice(String notice_no) {
+		
+		String query = " delete from a20_track2_web_notice "+
+						" where notice_no = '"+notice_no+"' ";
+		int result = 0;
+		try {
+			con = common.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+			
+		} catch (RemoteException me){
+			System.out.println(" RemoteException deleteNotice(): " + me.getMessage());
+		} catch (SQLException se){
+			System.out.println(" SQLException deleteNotice(): " + se.getMessage());
+		} catch (Exception e) {
+			System.out.println(" 오류 : D_2_DAO.deleteNotice() ");
+		} finally {
+			try {
+				common.close(con, ps);
+			} catch (Exception e) {
+				System.out.println(" deleteNotice close Exception " + e.getMessage());
+			}
+		}
+		return result;
+	}
 }

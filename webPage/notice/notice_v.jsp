@@ -68,6 +68,7 @@ td.title{
 	width : 100%;
 	height : 300px;
 	resize : none;
+	font-size : 11px;
 }
 .buttons {
 	width : 100%;
@@ -82,11 +83,26 @@ td.title{
 	padding : 10px 20px;
 }
 </style>
+<script>
+	function deleteNotice(){
+		var yn = confirm("정말 삭제 하겠습니까? ");
+		if(yn) {
+			var fm = document.notice;
+			fm.action = "notice_delete.jsp";
+			fm.method = "post";
+			fm.submit();
+		}
+	}
+</script>
+	<form name="notice">
+		<input type="hidden" name="t_notice_no" value="<%=notice_no%>">
+	</form>
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
 			 HOME | COMMUNITY | NOTICE
 		</p>
+		
 		<div class="board_list">
 			<table class="board_table">
 				<colgroup>
@@ -104,12 +120,12 @@ td.title{
 				<tbody>
 					<tr>
 						<th>내용</th>
-						<td colspan="2"><textarea class="textarea" readonly><%=dtoN.getContent()%>
-						</textarea></td>
+						<td colspan="2"><textarea class="textarea" readonly><%=dtoN.getContent()%></textarea></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td colspan="2"><%=dtoN.getReg_id()%></td>
+						<td><%=dtoN.getReg_id()%></td>
+						<td> 등록일자 : <%=dtoN.getReg_date()%></tr>
 					</tr>
 				</tbody>
 			</table>			
@@ -118,7 +134,8 @@ td.title{
 		<div class="buttons">
 				<p>
 					<a href="notice_r.jsp">목 록</a>
-					<a href="notice_w.jsp">수 정</a>
+					<a href="notice_u.jsp?t_noticeNo=<%=dtoN.getNotice_no()%>">수 정</a>
+					<a href="javascript:deleteNotice()">삭 제</a>
 				</p>
 
 			</div>

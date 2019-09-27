@@ -2,10 +2,20 @@
 <%@ include file="/common_head.jsp" %>
 <%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
 <%	
+	request.setCharacterEncoding("UTF-8");	
 	String notice_no = request.getParameter("t_noticeNo");
 	Notice_DAO dao = new Notice_DAO();
+	
+	String selValue = request.getParameter("t_sel");
+	String txtValue = request.getParameter("t_search");
+	if(selValue == null){
+		selValue ="title";
+		txtValue ="";
+	}
+	ArrayList<Notice_DTO> arrN = dao.getNoticeList(selValue,txtValue);
+
 	int nHit = dao.noticeHit(notice_no);
-	ArrayList<Notice_DTO> arrN = dao.getNoticeList();
+	
 %>
 <div id="con">
 <style>
@@ -19,6 +29,7 @@
 	border-bottom : #999 1px;
 }
 </style>
+<!--<%="========="+txtValue%>-->
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -90,21 +101,21 @@ td.title{
 <script>
 	function formSearch(){
 		var fm = document.notice;
-		fm.action = "notice_proc.jsp";
+		fm.action = "notice_r.jsp";
 		fm.method = "post";
 		
-		alert(fm.t_sel.value);
-		alert(fm.t_search.value);
-		//fm.submit();
+		//alert(fm.t_sel.value);
+		//alert(fm.t_search.value);
+		fm.submit();
 	}
 </script>
 		<form name="notice">
 			<div class="search">
 				<select name="t_sel">
-					<option value="title">제목</option>
-					<option value="content">내용</option>
+					<option value="title" <%if(selValue.equals("title")) out.print("selected");%>>제목</option>
+					<option value="content" <%if(selValue.equals("content")) out.print("selected");%>>내용</option>
 				</select>
-				<input type="text" name="t_search" style="height:17px">
+				<input type="text" value="<%=txtValue%>" name="t_search" style="height:17px">
 				<input type="button" onClick="javascript:formSearch()" value=" 검 색 " style="width: 60px"/>
 			</div>
 		</form>	
@@ -129,8 +140,7 @@ td.title{
 				</thead>
 				<tbody>
 				<% 
-				for(int k=0; k < arrN.size(); k++) {
-					
+				for(int k=0; k < arrN.size(); k++) {					
 				%>
 					<tr>
 						<td><a href="notice_v.jsp?t_noticeNo=<%=arrN.get(k).getNotice_no()%>">

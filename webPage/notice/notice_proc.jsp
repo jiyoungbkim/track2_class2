@@ -1,8 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ page import="dao.Notice_DAO,dto.Notice_DTO,common.CommonUtil"%>
 <%
-	request.setCharacterEncoding("UTF-8");
-	
+	request.setCharacterEncoding("UTF-8");	
 	Notice_DAO dao = new Notice_DAO();
 
 	String notice_no 	= dao.getNoticeNo();	
@@ -10,7 +9,7 @@
 	String content 		= request.getParameter("t_content");
 	String file_name_1  = "";
 	//String value 		= request.getParameter("t_value");
-	String reg_id 		= "홍길동";
+	String reg_id 		= request.getParameter("t_reg_id");
 	String reg_date 	= CommonUtil.getToday();
 	
 	//int result = 0;
@@ -20,8 +19,7 @@
 
 	Notice_DTO notice_dto = new Notice_DTO(notice_no,title,content,file_name_1,reg_id,reg_date,0);
 	int result = dao.insertNotice(notice_dto);
-	
-	
+		
 	/*	
 	//out.print(query);
 	if(result > 0) {
@@ -31,7 +29,7 @@
 	}
 	out.print("notice_no :"+notice_no);
 	out.print("<br>");
- out.print("title :"+title);
+	out.print("title :"+title);
 	out.print("<br>");
 	out.print("content : "+content);
 	out.print("<br>");
