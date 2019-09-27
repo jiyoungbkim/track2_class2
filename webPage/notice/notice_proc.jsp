@@ -3,23 +3,41 @@
 <%
 	request.setCharacterEncoding("UTF-8");	
 	Notice_DAO dao = new Notice_DAO();
-
-	String notice_no 	= dao.getNoticeNo();	
+	
+	String work_gubun 		= request.getParameter("t_work_gubun");
+	int result = 0;
+	String notice_no;
+	String msg ="";	
 	String title 		= request.getParameter("t_title");
+	if(title != null) title = title.replaceAll("\'","\''");
 	String content 		= request.getParameter("t_content");
+	if(content != null ) content = content.replaceAll("\'","\''");
 	String file_name_1  = "";
-	//String value 		= request.getParameter("t_value");
 	String reg_id 		= request.getParameter("t_reg_id");
+	if(reg_id != null) reg_id.replaceAll("\'","\''");
 	String reg_date 	= CommonUtil.getToday();
+	
+	if(work_gubun.equals("insert")){
+		notice_no 	= dao.getNoticeNo();					
+		Notice_DTO notice_dto = new Notice_DTO(notice_no,title,content,file_name_1,reg_id,reg_date,0);			
+		result = dao.insertNotice(notice_dto);
+		msg = "등록";
+	} else if(work_gubun.equals("update")){
+		notice_no 	= request.getParameter("t_notice_no");					
+		Notice_DTO notice_dto = new Notice_DTO(notice_no,title,content,file_name_1,reg_id,reg_date,0);
+		result = dao.updateNotice(notice_dto);
+		msg = "수정";
+	} else if(work_gubun.equals("delete")){
+		notice_no 	= request.getParameter("t_notice_no");		
+		result = dao.deleteNotice(notice_no);
+		msg = "삭제";		
+	}
 	
 	//int result = 0;
 	//int result = dao.insertNotice(notice_no,title,content,reg_id,reg_date);
 	//String query = "insert into a20_track2_web_notice(notice_no, title, content, reg_id, reg_date) "+
 	//				" values ('"+notice_no+"','"+title+"','"+content+"','"+reg_id+"','"+reg_date+"') ";
-
-	Notice_DTO notice_dto = new Notice_DTO(notice_no,title,content,file_name_1,reg_id,reg_date,0);
-	int result = dao.insertNotice(notice_dto);
-		
+	
 	/*	
 	//out.print(query);
 	if(result > 0) {
@@ -39,9 +57,9 @@
 	<head>
 		<script>
 			<% if(result > 0) {%>
-				alert("등록되었습니다.");
+				alert("<%=msg%>"+"되었습니다.");
 			<% } else {%>
-				alert("정상처리되지 못했습니다.");
+				alert("<%=msg%> 처리되지 못했습니다.");
 			<% }%>
 			location.href = "notice_r.jsp";
 		</script>

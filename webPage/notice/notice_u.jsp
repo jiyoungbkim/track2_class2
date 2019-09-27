@@ -88,7 +88,23 @@ td.title{
 	function update() {
 		var fm = document.notice;
 		<!--document.notice.action = "notice_proc.jsp";-->
-		fm.action = "notice_update.jsp";
+		//fm.action = "notice_update.jsp";
+		if(fm.t_reg_id.value == ""){
+			alert("작성자 입력!");
+			fm.t_reg_id.focus();
+			return;
+		}
+		if(fm.t_title.value == ""){
+			alert("제목 입력!");
+			fm.t_title.focus();
+			return;
+		}
+		if(fm.t_content.value == ""){
+			alert("내용 입력!");
+			fm.t_content.focus();
+			return;
+		}
+		fm.action = "notice_proc.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -99,6 +115,7 @@ td.title{
 			 HOME | COMMUNITY | NOTICE
 		</p>
 		<form name="notice">
+		<input type="hidden" name="t_work_gubun" value="update">
 		<input name="t_notice_no" type="hidden" value="<%=notice_no%>">
 		<div class="board_list">
 			<table class="board_table">

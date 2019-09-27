@@ -222,11 +222,11 @@ body {
 					</ul>
 				</div>
 			</li>
-			<li class="menu5"><a href="notice_r.jsp">커뮤니티</a>
+			<li class="menu5"><a href="/notice/notice_r.jsp">커뮤니티</a>
 				<div id="s_div_5">
 					<ul>
-						<li><a href="notice_r.jsp">NOTICE</a></li>
-						<li><a href="">NEWS</a></li>
+						<li><a href="/notice/notice_r.jsp">NOTICE</a></li>
+						<li><a href="/news/news_r.jsp">NEWS</a></li>
 						<li><a href="">FREEBOARD</a></li>
 						<li><a href="">QNA</a></li>
 					</ul>
