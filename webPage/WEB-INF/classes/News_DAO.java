@@ -183,9 +183,11 @@ public class News_DAO {
     } 
     return i;
   }
-  public int updateNews(String paramString1, String paramString2, String paramString3, String paramString4, String paramString5) {
+  public int updateNews(String news_no,String title,String content,String reg_id,String reg_date) {
     String str = " update a20_track2_web_news "+
-				" set title = '" + paramString2 + "', content = '" + paramString3 + "',  reg_id = '" + paramString4 + "', reg_date = '" + paramString5 + "'  where news_no = '" + paramString1 + "' ";
+				" set title = '" + title + "', content = '" + content + "', "+
+				" reg_id = '" + reg_id + "', reg_date = '" + reg_date + "' "+
+				" where news_no = '" + news_no + "' ";
     
     int i = 0;
     try {
