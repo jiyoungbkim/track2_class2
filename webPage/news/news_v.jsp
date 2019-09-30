@@ -1,11 +1,11 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
-<%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
+<%@ page import="java.util.*,dao.News_DAO,dto.News_DTO"%>
 <%
-	String notice_no = request.getParameter("t_noticeNo");
-	Notice_DAO dao = new Notice_DAO();
-	int nHit = dao.noticeHit(notice_no);
-	Notice_DTO dtoN = dao.getNoticeView(notice_no);
+	String news_no = request.getParameter("t_newsNo");
+	News_DAO dao = new News_DAO();
+	int wHit = dao.newsHit(news_no);
+	News_DTO dtoW = dao.getNewsView(news_no);
 %>
 <div id="con">
 <style>
@@ -84,12 +84,12 @@ td.title{
 }
 </style>
 <script>
-	function deleteNotice(){
+	function deleteNews(){
 		var yn = confirm("정말 삭제 하겠습니까? ");
 		if(yn) {
 			var fm = document.notice;
 			//fm.action = "notice_delete.jsp";
-			fm.action = "notice_proc.jsp";
+			fm.action = "news_proc.jsp";
 			fm.method = "post";
 			fm.submit();
 		}
@@ -97,7 +97,7 @@ td.title{
 </script>
 	<form name="notice">
 		<input type="hidden" name="t_work_gubun" value="delete">
-		<input type="hidden" name="t_notice_no" value="<%=notice_no%>">
+		<input type="hidden" name="t_news_no" value="<%=news_no%>">
 	</form>
 	<div id="contents">
 		<p>
@@ -115,19 +115,19 @@ td.title{
 				<thead>				
 					<tr>
 						<th>제목</th>
-						<td><%=dtoN.getTitle()%></td>
-						<td><i class="fa fa-eye"> 조회수 : <%=dtoN.getHit()%></td>
+						<td><%=dtoW.getTitle()%></td>
+						<td><i class="fa fa-eye"> 조회수 : <%=dtoW.getHit()%></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>내용</th>
-						<td colspan="2"><textarea class="textarea" readonly><%=dtoN.getContent()%></textarea></td>
+						<td colspan="2"><textarea class="textarea" readonly><%=dtoW.getContent()%></textarea></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><%=dtoN.getReg_id()%></td>
-						<td> 등록일자 : <%=dtoN.getReg_date()%></tr>
+						<td><%=dtoW.getReg_id()%></td>
+						<td> 등록일자 : <%=dtoW.getReg_date()%></tr>
 					</tr>
 				</tbody>
 			</table>			
@@ -135,9 +135,9 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="notice_r.jsp">목 록</a>
-					<a href="notice_u.jsp?t_noticeNo=<%=dtoN.getNotice_no()%>">수 정</a>
-					<a href="javascript:deleteNotice()">삭 제</a>
+					<a href="news_r.jsp">목 록</a>
+					<a href="news_u.jsp?t_newsNo=<%=dtoW.getNews_no()%>">수 정</a>
+					<a href="javascript:deleteNews()">삭 제</a>
 				</p>
 
 			</div>

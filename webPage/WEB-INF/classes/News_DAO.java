@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.*;
 import common.DBConnectionOracle;
-import dto.Notice_DTO;
+import dto.News_DTO;
 import common.*;
 
 public class News_DAO {
@@ -85,5 +85,153 @@ public class News_DAO {
 		}
 		return result;
 	}
-	
+	public ArrayList<News_DTO> getNewsList(String selValue, String txtValue) {
+    ArrayList<News_DTO> arrW = new ArrayList<News_DTO>();
+    String query = " select news_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
+				" from a20_track2_web_news  where " + selValue + " like '%" + txtValue + "%' "+
+				" order by news_no desc ";
+    
+    try {
+      con = common.getConnection();
+      ps = con.prepareStatement(query);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        String news_no = rs.getString(1);
+        String title = rs.getString(2);
+        String content = rs.getString(3);
+        String reg_id = rs.getString(4);
+        String reg_date = rs.getString(5);
+        int hit = rs.getInt(6);
+        
+        News_DTO news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, hit);
+        arrW.add(news_DTO);
+      } 
+    } catch (RemoteException remoteException) {
+      System.out.println(" RemoteException getNewsList(): " + remoteException.getMessage());
+    } catch (SQLException sQLException) {
+      System.out.println(" SQLException getNewsList(): " + sQLException.getMessage());
+    } catch (Exception exception) {
+      System.out.println(" error : D_2_DAO.getNewsList() ");
+    } finally {
+      try {
+        common.close(con, ps, rs);
+      } catch (Exception exception) {
+        System.out.println(" getNewsList close Exception " + exception.getMessage());
+      } 
+    } 
+    return arrW;
+  }
+  public News_DTO getNewsView(String newsNo) {
+    String query =" select news_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
+				" from a20_track2_web_news "+
+				" where news_no = '" + newsNo + "' ";
+
+    
+    News_DTO news_DTO = null;
+    try {
+      con = common.getConnection();
+      ps = con.prepareStatement(query);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        String news_no = rs.getString(1);
+        String title = rs.getString(2);
+        String content = rs.getString(3);
+        String reg_id = rs.getString(4);
+        String reg_date = rs.getString(5);
+        int hit = rs.getInt(6);
+        
+        news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, hit);
+      } 
+    } catch (RemoteException remoteException) {
+      System.out.println(" RemoteException getNewsView(): " + remoteException.getMessage());
+    } catch (SQLException sQLException) {
+      System.out.println(" SQLException getNewsView(): " + sQLException.getMessage());
+    } catch (Exception exception) {
+      System.out.println(" error : D_2_DAO.getNewsView() ");
+    } finally {
+      try {
+        common.close(con, ps, rs);
+      } catch (Exception exception) {
+        System.out.println(" getNewsView close Exception " + exception.getMessage());
+      } 
+    } 
+    
+    return news_DTO;
+  }
+  public int newsHit(String newsNo) {
+    int i = 0;
+    String str = " update a20_track2_web_news  set hit = hit+1 "+
+				" where news_no = '" + newsNo + "' ";
+
+    
+    try {
+      this.con = this.common.getConnection();
+      this.ps = this.con.prepareStatement(str);
+      i = this.ps.executeUpdate();
+    } catch (RemoteException remoteException) {
+      System.out.println(" RemoteException newsHit(): " + remoteException.getMessage());
+    } catch (SQLException sQLException) {
+      System.out.println(" SQLException newsHit(): " + sQLException.getMessage());
+    } catch (Exception exception) {
+      System.out.println(" error : D_2_DAO.newsHit() ");
+    } finally {
+      try {
+        this.common.close(this.con, this.ps);
+      } catch (Exception exception) {
+        System.out.println(" newsHit close Exception " + exception.getMessage());
+      } 
+    } 
+    return i;
+  }
+  public int updateNews(String paramString1, String paramString2, String paramString3, String paramString4, String paramString5) {
+    String str = " update a20_track2_web_news "+
+				" set title = '" + paramString2 + "', content = '" + paramString3 + "',  reg_id = '" + paramString4 + "', reg_date = '" + paramString5 + "'  where news_no = '" + paramString1 + "' ";
+    
+    int i = 0;
+    try {
+      this.con = this.common.getConnection();
+      this.ps = this.con.prepareStatement(str);
+      i = this.ps.executeUpdate();
+    }
+    catch (RemoteException remoteException) {
+      System.out.println(" RemoteException updateNews(): " + remoteException.getMessage());
+    } catch (SQLException sQLException) {
+      System.out.println(" SQLException updateNews(): " + sQLException.getMessage());
+    } catch (Exception exception) {
+      System.out.println(" error : D_2_DAO.updateNews() ");
+    } finally {
+		
+      try {
+        this.common.close(this.con, this.ps);
+      } catch (Exception exception) {
+        System.out.println(" updateNews close Exception " + exception.getMessage());
+      } 
+    } 
+    return i;
+  }
+  public int deleteNews(String newsNo) {
+    String str = " delete from a20_track2_web_news "+
+				" where news_no = '" + newsNo + "' ";
+   
+    int i = 0;
+    try {
+      this.con = this.common.getConnection();
+      this.ps = this.con.prepareStatement(str);
+      i = this.ps.executeUpdate();
+    }
+    catch (RemoteException remoteException) {
+      System.out.println(" RemoteException deleteNotice(): " + remoteException.getMessage());
+    } catch (SQLException sQLException) {
+      System.out.println(" SQLException deleteNotice(): " + sQLException.getMessage());
+    } catch (Exception exception) {
+      System.out.println(" error : D_2_DAO.deleteNotice() ");
+    } finally {
+      try {
+        this.common.close(this.con, this.ps);
+      } catch (Exception exception) {
+        System.out.println(" deleteNotice close Exception " + exception.getMessage());
+      } 
+    } 
+    return i;
+  }
 }

@@ -4,7 +4,7 @@
 	request.setCharacterEncoding("UTF-8");	
 	News_DAO dao = new News_DAO();
 	
-	String news_no = request.getParameter("t_news_no");
+	String news_no = dao.getNewsNo();
 	String title 	= request.getParameter("t_title");
 	String content 	= request.getParameter("t_content");
 	String reg_id = request.getParameter("t_reg_id");
@@ -14,11 +14,17 @@
 	int result = 0;
 	String msg ="";
 	if(work_gubun.equals("insert")) {
-		News_DTO news_dto = new News_DTO(news_no,title,content,reg_id,reg_date,0);
+		result = dao.insertNews(news_no,title,content,reg_id,reg_date);
 		msg ="등록";
+	}  else if(work_gubun.equals("update")){
+		news_no 	= request.getParameter("t_news_no");					
+		result = dao.updateNews(news_no,title,content,reg_id,reg_date);
+		msg = "수정";
+	} else if(work_gubun.equals("delete")){
+		news_no 	= request.getParameter("t_news_no");		
+		result = dao.deleteNews(news_no);
+		msg = "삭제";		
 	}
-	
-
 %>
 <html>
 	<head>
