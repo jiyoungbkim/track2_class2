@@ -58,7 +58,7 @@ td.title{
 }
 .textarea{
 	overflow:hidden;		
-	width : 100%;
+	width : 99%;
 	height : 300px;
 	resize : none;
 	color :#848484; 
@@ -133,16 +133,14 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="notice_r.jsp">목 록</a>
+					<a href="news_r.jsp">목 록</a>
 					<!--<a href="notice_proc.jsp?t_title=가가&t_value=bbb">get</a>-->
 					<a href="javascript:save()">등 록</a> <!---->
 				</p>
 		</div>
 		</form>
 	</div>
-<style>
-</style>
-
+	<%@ include file="/common_footer.jsp" %>	
 </div>
 </body>
 </html>

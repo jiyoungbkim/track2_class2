@@ -2,12 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>[김지영]JSL 방문을 환영합니다</title>
+<title>JSL 방문을 환영합니다</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">	
-<link rel="stylesheet" type="text/css" href="/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="/css/base.css" />
-<link rel="stylesheet" type="text/css" href="/css/etc.css?ver=2" />  
-<script type="text/javascript" src="/js/jquery-1.8.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<link rel="stylesheet" type="text/css" href="../css/base.css" /> 
+<script type="text/javascript" src="../js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 		$(function(){
@@ -53,39 +52,39 @@
 	//]]>
 </script>
 <style>
-
+*{margin : 0; padding : 0;}
+li {
+	list-style-type:none;
+}
+a{
+	text-decoration:none;
+}
 body {
 	font : 12px "고딕", Gothic ;
-	background : url("images/bg_grid.gif");
+	//background : url("images/bg_grid.gif");
 	}
 #con {
 	width : 940px ;
-	margin: 0px auto;
 	//height : 880px;
+	margin: 0px auto;
 	//background : #ff6699;
 	padding : 20px;
 	clear : both;
 }
-#header {	
+#header {
+	
 	width : 940px ;
 	height : 140px ;
 	//padding : 20px;
-	background : url("/images/header.png");
+	background : url("images/header.png");
 	//background-size : 100%;
-	margin-bottom : 20px;	
-}
-#menu_bar {
-	float : left;
-	//display:inline-block;
-	width : 110px;
-	//height : 460px;
-	padding : 20px;
-	//background : #996699;	
+	margin-bottom : 20px;
+	
 }
 #contents {	
 	float : right;
-	width : 748px;
-	//height : 460px;
+	width : 900px;
+	height : 460px;
 	padding : 20px;
 	//background : #3366ff;
 	margin-bottom : 20px;
@@ -95,9 +94,9 @@ body {
 	display:block;
 	clear:both;
 	width : 900px;
-	//height : 60px;
+	height : 60px;
 	padding : 20px;
-	//background : #ff6699;
+	background : #ffff33;
 }
 
 .top_right {
@@ -115,8 +114,10 @@ body {
 	color : #848484;
 	font-size : 10px;
 }
+
 .header_menu li{
-	float : left;	
+	float : left;
+	
 }
 .header_menu li a{
 	display : inline-block;
@@ -167,22 +168,38 @@ body {
 	width : 100px;
 	background : #5B247A;	
 }
+
 .p2{
 	color : #fff;
 	text-align : justify;
 }
+#contents ul li i{
+	align : right;
+	color : #666;
+	vertical-align: middle;
+	size : 5px;
+	line-height : 40px;
+}
+#contents ul li a{
+	text-align : left;
+}
 .p3 {
 	color : #ccc;
 }
+.icon {
+	width : 23px;
+	color : white;
+	vertical-align: middle;
+}
+
 </style>
 </head>
 <body>
-
 <div id="con">
 	<ul class="top_right">
-		<li><a href="/member/member_w.jsp">JOIN</a></li>
+		<li><a href="">JOIN</a></li>
 		<li><a href="">LOGIN</a></li>
-		<li><a href="../index.jsp">HOME</a></li>
+		<li><a href="">HOME</a></li>
 	</ul>
 	<div id="header">
 		<ul class="header_menu">
@@ -223,16 +240,66 @@ body {
 					</ul>
 				</div>
 			</li>
-			<li class="menu5"><a href="/notice/notice_r.jsp">커뮤니티</a>
+			<li class="menu5"><a href="notice/notice_r.html">커뮤니티</a>
 				<div id="s_div_5">
 					<ul>
-						<li><a href="/notice/notice_r.jsp">NOTICE</a></li>
-						<li><a href="/news/news_r.jsp">NEWS</a></li>
-						<li><a href="/freeboard/freeboard_r.jsp">FREEBOARD</a></li>
-						<li><a href="/qanda/qanda_r.jsp">QNA</a></li>
+						<li><a href="notice/notice_r.html">NOTICE</a></li>
+						<li><a href="">NEWS</a></li>
+						<li><a href="">FREEBOARD</a></li>
+						<li><a href="">QNA</a></li>
 					</ul>
 				</div>
 			</li>
 		</ul>
+	</div>	
+<!-- 	
+	<div id="menu-icon">
+		<ul>
+			<li><i class="fas fa-bell fa-lg"></i><a href="notice/notice_r.html">&nbsp; NOTICE</a></li>
+			<li><i class="fas fa-bullhorn fa-lg"></i><a href="">&nbsp; NEWS</a></li>
+			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
+			<li><i class="fab fa-quora fa-lg"></i><a href="">&nbsp; QNA</a></li>
+		</ul>
+	</div> -->
+	<div id="contents">
+		<ul>
+			<li><i class="fas fa-bell fa-lg"></i><a href="notice/notice_r.html">&nbsp; NOTICE</a></li>
+			<li><i class="fas fa-bullhorn fa-lg"></i><a href="news/news_r.jsp">&nbsp; NEWS</a></li>
+			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
+			<li><i class="fab fa-quora fa-lg"></i><a href="">&nbsp; QNA</a></li>
+		</ul>	
+	</div>
+<style>
+#footer{
+	background :#42464d;
+	padding-top:10px;
+	//padding-bottom:10px;
+}
+#footer .address {
+	font-style:normal;
+	color:#ababb1;
+	margin-bottom:10px;
+}
+#footer .address .title{
+	font-size:14px;
+	margin-bottom:8px;
+	color:#fff;
+}
+#footer .copyright{
+	color:#fff;
+}
+</style>		
+	
+	<div id="footer">
+		<address class="address">
+			<p class="title">본사</p>
+			(우)12345 대전광역시 중구 계롱로 825
+			(용두동, 희영빌딩) 5층, 6층/ 고객센터: 042-242-4412
+			<br>사업자등록번호: 305-86-06709
+		</address>
+		<p class="copyright">Copyright &copy;
+		JSL 전자개발주식회사. All rights reserved.</p>
 	</div>
 </div>
+</body>
+</html>

@@ -66,7 +66,7 @@ td.title{
 }
 .textarea{
 	overflow:hidden;		
-	width : 100%;
+	width : 99%;
 	height : 300px;
 	resize : none;
 	color :#848484; 
@@ -112,7 +112,7 @@ td.title{
 	<div id="contents">
 		<p>
 			<img src="/images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NOTICE
+			 HOME | COMMUNITY | NEWS
 		</p>
 		<form name="notice">
 		<input type="hidden" name="t_work_gubun" value="update">
@@ -144,15 +144,13 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="notice_r.jsp">취 소</a>
+					<a href="news_r.jsp">취 소</a>
 					<a href="javascript:update()">저 장</a> <!---->
 				</p>
 		</div>
 		</form>
 	</div>
-<style>
-</style>
-
+	<%@ include file="/common_footer.jsp" %>
 </div>
 </body>
 </html>

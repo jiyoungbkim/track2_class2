@@ -113,24 +113,6 @@ td.title{
 	vertical-align:top;
 	height : 23px;
 }
-/* .paging {
-	padding-top:30px; 
-	text-align:center;
-}
-.paging a {
-	padding:10px; 
-	border:1px solid #e0e0e0;
-}
-.paging a.active {
-	background:#007dc6;
-	color:#fff
-}
-.paging .btn_write{
-	background : #123454;
-	padding : 10px 16px;
-	color : #fff;
-	float : right;
-} */
 </style>
 	<div id="contents">
 		<p>
@@ -213,36 +195,7 @@ td.title{
 			</div>
 		</div>
 	</div>
-<style>
-/* #footer{
-	background :#42464d;
-	padding-top:10px;
-	//padding-bottom:10px;
-}
-#footer .address {
-	font-style:normal;
-	color:#ababb1;
-	margin-bottom:10px;
-}
-#footer .address .title{
-	font-size:14px;
-	margin-bottom:8px;
-	color:#fff;
-}
-#footer .copyright{
-	color:#fff;
-} */
-</style>
-	<div id="footer">
-		<address class="address">
-			<p class="title">본사</p>
-			(우)12345 대전광역시 중구 계롱로 825
-			(용두동, 희영빌딩) 5층, 6층/ 고객센터: 042-242-4412
-			<br>사업자등록번호: 305-86-06709
-		</address>
-		<p class="copyright">Copyright &copy;
-		JSL 전자개발주식회사. All rights reserved.</p>
-	</div>
+	<%@ include file="/common_footer.jsp" %>
 </div>
 </body>
 </html>

@@ -58,15 +58,7 @@
 %>
 <div id="con">
 <style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
+
 </style>
 <!--<%="========="+txtValue%>-->
 	<div id="menu_bar">
@@ -241,7 +233,8 @@ td.title{
 	color:#fff;
 } */
 </style>
-	<div id="footer">
+<%@ include file="/common_footer.jsp" %>
+	<!-- <div id="footer">
 		<address class="address">
 			<p class="title">본사</p>
 			(우)12345 대전광역시 중구 계롱로 825
@@ -250,7 +243,7 @@ td.title{
 		</address>
 		<p class="copyright">Copyright &copy;
 		JSL 전자개발주식회사. All rights reserved.</p>
-	</div>
+	</div> -->
 </div>
 </body>
 </html>

@@ -1,3 +1,13 @@
+/*menu_bar*/
+#menu_bar ul li i{
+	color : #666;
+	vertical-align: middle;
+	size : 5px;
+	line-height : 40px;
+}
+#menu_bar ul li{
+	border-bottom : #999 1px;
+}
 /*paging css*/
 .paging {
 	padding-top:30px; 

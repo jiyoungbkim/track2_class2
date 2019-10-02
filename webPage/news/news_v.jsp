@@ -37,6 +37,8 @@
 .board_table td{
 	text-align:left;
 	padding : 7px;
+}
+.cover{
 	border-top:1px solid #848484;
 	border-bottom:1px solid #848484;
 }
@@ -102,7 +104,7 @@ td.title{
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NOTICE
+			 HOME | COMMUNITY | NEWS
 		</p>
 		
 		<div class="board_list">
@@ -115,8 +117,8 @@ td.title{
 				<thead>				
 					<tr>
 						<th>제목</th>
-						<td><%=dtoW.getTitle()%></td>
-						<td><i class="fa fa-eye"> 조회수 : <%=dtoW.getHit()%></td>
+						<td class="cover"><%=dtoW.getTitle()%></td>
+						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoW.getHit()%></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -126,8 +128,8 @@ td.title{
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><%=dtoW.getReg_id()%></td>
-						<td> 등록일자 : <%=dtoW.getReg_date()%></tr>
+						<td class="cover"><%=dtoW.getReg_id()%></td>
+						<td class="cover"> 등록일자 : <%=dtoW.getReg_date()%></tr>
 					</tr>
 				</tbody>
 			</table>			
@@ -142,9 +144,7 @@ td.title{
 
 			</div>
 	</div>
-<style>
-</style>
-
+	<%@ include file="/common_footer.jsp" %>
 </div>
 </body>
 </html>

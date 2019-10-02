@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
-<%@ include file="/common_head.jsp" %>
+<%@ include file="/common_head.jsp"%>
 <%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
 <%	
 	request.setCharacterEncoding("UTF-8");	
@@ -8,18 +8,6 @@
 	Notice_DTO dtoN = dao.getNoticeView(notice_no);
 %>
 <div id="con">
-<style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
-
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -65,7 +53,7 @@ td.title{
 }
 .textarea{
 	overflow:hidden;		
-	width : 100%;
+	width : 99%;
 	height : 300px;
 	resize : none;
 	color :#848484; 
@@ -149,9 +137,7 @@ td.title{
 		</div>
 		</form>
 	</div>
-<style>
-</style>
-
+	<%@ include file="/common_footer.jsp" %>
 </div>
 </body>
 </html>

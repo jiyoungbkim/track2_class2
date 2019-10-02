@@ -8,17 +8,6 @@
 	Notice_DTO dtoN = dao.getNoticeView(notice_no);
 %>
 <div id="con">
-<style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -37,6 +26,9 @@
 .board_table td{
 	text-align:left;
 	padding : 7px;
+	
+}
+.cover{
 	border-top:1px solid #848484;
 	border-bottom:1px solid #848484;
 }
@@ -53,7 +45,6 @@ td.title{
 	font : 11px;
 	color : #848484;
 }
-
 .search{
 	float: right;
 	margin-bottom: 5px;
@@ -115,8 +106,8 @@ td.title{
 				<thead>				
 					<tr>
 						<th>제목</th>
-						<td><%=dtoN.getTitle()%></td>
-						<td><i class="fa fa-eye"> 조회수 : <%=dtoN.getHit()%></td>
+						<td class="cover"><%=dtoN.getTitle()%></td>
+						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoN.getHit()%></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -126,8 +117,8 @@ td.title{
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><%=dtoN.getReg_id()%></td>
-						<td> 등록일자 : <%=dtoN.getReg_date()%></tr>
+						<td class="cover"><%=dtoN.getReg_id()%></td>
+						<td class="cover"> 등록일자 : <%=dtoN.getReg_date()%></tr>
 					</tr>
 				</tbody>
 			</table>			
@@ -142,9 +133,7 @@ td.title{
 
 			</div>
 	</div>
-<style>
-</style>
-
+	<%@ include file="/common_footer.jsp" %>
 </div>
 </body>
 </html>
