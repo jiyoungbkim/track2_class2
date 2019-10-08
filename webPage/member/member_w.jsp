@@ -93,6 +93,86 @@ select {
 						"width=400, height=210");
 		}
 	}
+	function save(){
+		var form = document.member;
+		// var tf = checkEmpty(form.t_pw_1, "비밀번호 입력!")
+		// if(tf) {
+			
+		// } else {
+			// return;
+		// }
+		if(!checkEmpty(form.t_id, "아이디 입력!")) return;
+		if(form.id_check_value.value == ""){
+			alert("아이디 중복 체크 하세요.");
+			return;
+		}
+		if(form.t_id.value != form.id_check_value.value){
+			alert("아이디 변경 후 중복검사를 하지 않았습니다.");
+			form.t_id.focus();
+		}
+		
+		if(!checkEmpty(form.t_pw_1, "비밀번호 입력!")) return;
+		if(!checkEmpty(form.t_pw_2, "비밀번호 확인 입력!")) return;
+		if(form.t_pw_1.value != form.t_pw_2.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			form.t_pw_1.focus();
+			return;
+		}
+		if(!checkEmpty(form.t_name, "성명 입력!")) return;
+		if(!checkEmpty(form.t_birth, "생년월일 입력!")) return;
+		if(form.t_birth.value.length != 6) {
+			alert("날짜형식 오류! 예)891214");
+			form.t_birth.focus();
+			return;
+		}
+		if(form.t_area.value=="선택안함"){
+			alert("지역 선택!");
+			form.t_area.focus();
+			return;
+		}
+		if(!checkEmpty(form.t_address, "나머지 주소 입력!")) return;
+		if(!checkEmpty(form.t_telecom, "통신사 선택!")) return;
+		if(!checkEmpty(form.t_phone_1, "전화번호 입력!")) return;
+		if(!checkEmpty(form.t_phone_2, "전화번호 입력!")) return;
+		if(!checkEmpty(form.t_phone_3, "전화번호 입력!")) return;
+		if(form.t_phone_1.value.length != 3) {
+			alert("3자리로 입력!");
+			form.t_phone_1.focus();
+			return;
+		}
+		if(form.t_phone_2.value.length != 4) {
+			alert("4자리로 입력!");
+			form.t_phone_2.focus();
+			return;
+		}
+		if(form.t_phone_3.value.length != 4) {
+			alert("4자리로 입력!");
+			form.t_phone_3.focus();
+			return;
+		}
+		if(!checkEmpty(form.t_email_1, "e-mail 입력!")) return;
+		if(!checkEmpty(form.t_email_2, "e-mail 입력!")) return;
+		
+		form.action = "member_proc.jsp";
+		form.method = "post";
+		form.submit();
+		/*
+		if(form.t_pw_1.value==""){
+			alert("비밀번호 입력!");
+			form.t_pw_1.focus();
+			return;
+		}
+		if(form.t_pw_2.value==""){
+			alert("비밀번호 확인 입력!");
+			form.t_pw_2.focus();
+			return;
+		}
+		if(form.t_name.value==""){
+			alert("성명 입력!");
+			form.t_name.focus();
+			return;
+		}*/
+	}
 </script>
 	<div id="contents">
 		<p>
@@ -111,28 +191,28 @@ select {
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input name="t_id" class="id" type="text" size="15%" autofocus="autofocus">
+							<input name="t_id" class="id" type="text" size="15%" autofocus="autofocus" maxlength="20">
 							<input type="button" onClick="javascript:check_id()" value="중복검사" style="height:23px">
-							<input type="text" name="id_check_value">
+							<input type="hidden" name="id_check_value">
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>비밀번호</th>
-						<td><input name="t_pw_1" type="text" size="15%"></td>
+						<td><input name="t_pw_1" type="password" size="15%" maxlength="15"></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
-						<td><input name="t_pw_2" type="text" size="15%"></td>
+						<td><input name="t_pw_2" type="password" size="15%" maxlength="15"></td>
 					</tr>
 					<tr>
 						<th>성 명</th>
-						<td><input name="t_name" type="text" size="15%"></td>
+						<td><input name="t_name" type="text" size="15%" maxlength="5"></td>
 					</tr>
 					<tr>
 						<th>생년월일</th>
-						<td><input name="t_birth" type="text" size="15%"></td>
+						<td><input name="t_birth" type="text" size="15%" maxlength="6"></td>
 					</tr>
 					<tr>
 						<th>주소</th>
@@ -144,7 +224,7 @@ select {
 							 <option value="대전"> 대전 </option>
 							 <option value="광주"> 광주 </option>
 							</select>
-							<input name="t_address" type="text" size="40%" placeholder="나머지 주소">
+							<input name="t_address" type="text" size="40%" placeholder="나머지 주소" maxlength="25">
 						</td> <!---->
 					</tr>
 					<tr>
@@ -154,16 +234,16 @@ select {
 							<input type = "radio" value="KT" name = "t_telecom"/> KT
 							<input type = "radio" value="LGU+" name = "t_telecom"/> LGU+
 							&nbsp;
-							<input name="t_phone_1" type = "text" size = "1"/> - 
-							<input name="t_phone_2" type = "text" size = "3"/> - 
-							<input name="t_phone_3" type = "text" size = "3"/>
+							<input name="t_phone_1" type = "text" size = "1" maxlength="3"/> - 
+							<input name="t_phone_2" type = "text" size = "3" maxlength="4"/> - 
+							<input name="t_phone_3" type = "text" size = "3" maxlength="4"/>
 						</td>
 					</tr>
 					<tr>
 						<th> 이메일 </th>
 						<td>
-							<input name="t_email_1" type = "text" size="10%"/> @ 
-							<input name="t_email_2" type = "text" size="10%" list="mail_list">
+							<input name="t_email_1" type = "text" size="10%" maxlength="20"/> @ 
+							<input name="t_email_2" type = "text" size="10%" list="mail_list" maxlength="20">
 							<datalist id="mail_list">
 								<option value="naver.com">
 								<option value="gmail.com">
@@ -174,10 +254,10 @@ select {
 					<tr>
 						<th> 관심분야 </th>
 						<td>
-							<input name="t_att_desk" type="checkbox" value="DESKTOP"/>DESKTOP
-							<input name="t_att_note" type="checkbox" value="NOTEBOOK"/>NOTEBOOK
-							<input name="t_att_print" type="checkbox" value="PRINT"/>PRINT
-							<input name="t_att_bean" type="checkbox" value="PROJECTER"/>PROJECTER
+							<input name="t_att_desk" type="checkbox" value="y"/>DESKTOP
+							<input name="t_att_note" type="checkbox" value="y"/>NOTEBOOK
+							<input name="t_att_print" type="checkbox" value="y"/>PRINT
+							<input name="t_att_beam" type="checkbox" value="y"/>PROJECTER
 						</td>
 					</tr>
 				</tbody>
@@ -187,7 +267,8 @@ select {
 		<br>
 		<div class="buttons">
 			<p>
-				<a href="notice_r.jsp">회원가입</a>
+				<a href="javascript:save()">회원가입</a>
+				<!--<input type="button" onClick="Save()" value="회원가입">-->
 				<!--<a href="notice_proc.jsp?t_title=가가&t_value=bbb">get</a>-->
 				<a href="javascript:save()">다시작성</a> <!---->
 			</p>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/base.css" />
 <link rel="stylesheet" type="text/css" href="/css/etc.css?ver=2" />  
 <script type="text/javascript" src="/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 		$(function(){

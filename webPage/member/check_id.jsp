@@ -1,7 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
+<%@ page import="dao.Member_DAO"%>
 <%
+	Member_DAO dao = new Member_DAO();
 	String id = request.getParameter("t_id");
-	String result = "0";
+	String result = dao.getCheckcount(id);
 %>
 <html lang="ko">
 <head>
@@ -38,7 +40,7 @@
 		window.close();
 	}
 	function confirm_cancel(){
-		opener.document.member.t_id.focus();
+		opener.document.member.id_check_value.value="";
 		window.close();
 	}
 </script>
