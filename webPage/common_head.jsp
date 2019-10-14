@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿<%@ include file="/common_session_info.jsp"%>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -78,7 +79,7 @@ body {
 #menu_bar {
 	float : left;
 	//display:inline-block;
-	width : 110px;
+	width : 100px;
 	//height : 460px;
 	padding : 20px;
 	//background : #996699;	
@@ -182,8 +183,28 @@ body {
 <div id="con">
 	<ul class="top_right">
 		<li><a href="/member/member_w.jsp">JOIN</a></li>
-		<li><a href="">LOGIN</a></li>
-		<li><a href="../index.jsp">HOME</a></li>
+	<%
+		if(!sessionName.equals("")){
+	%>
+		<li><a href="/member/member_myinfo.jsp">MYPAGE</a></li>
+		<li><a href="/member/member_logout.jsp">LOGOUT</a></li>
+	<%
+		} else {
+	%>
+		<li><a href="/member/member_login.jsp">LOGIN</a></li>
+	<%
+		}
+	%>
+		<li><a href="/index.jsp">HOME</a></li>
+		<li><a>
+	<%
+		if(!sessionName.equals("")){			
+	%>
+		[<%=sessionName%>]님
+	<%	
+		}
+	%>
+		</a></li>
 	</ul>
 	<div id="header">
 		<ul class="header_menu">

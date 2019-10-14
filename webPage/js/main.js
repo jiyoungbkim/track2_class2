@@ -93,3 +93,4 @@ $(window).resize(function(){
 			$("#book_frame").animate({left:-$book_w*$bnnNum},300);
 	});
 });
+/*로그인*/

@@ -116,11 +116,11 @@ public class Notice_DAO {
 	// 목록 조회
 	public ArrayList<Notice_DTO> getNoticeList(String selValue, String txtValue){
 		ArrayList<Notice_DTO> arrN = new ArrayList<Notice_DTO>();
-		String query =" select notice_no, title, content, file_name_1, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
-						" from a20_track2_web_notice "+
-						" where "+selValue+" like '%"+txtValue+"%' "+
-						" order by notice_no desc ";
-						
+		String query = " select n.notice_no, n.title, n.content, n.file_name_1, m.name, to_char(n.reg_date, 'yyyy-mm-dd'), n.hit "+
+					" from a20_track2_web_notice n, a20_track2_web_member m "+
+					" where n.reg_id = m.id "+
+					" and n."+selValue+" like '%"+txtValue+"%' "+
+					" order by n.notice_no desc ";
 		try{
 			con = common.getConnection();
 			ps  = con.prepareStatement(query);
@@ -156,9 +156,11 @@ public class Notice_DAO {
 	//게시물 조회
 	public Notice_DTO getNoticeView(String noticeNo){
 
-		String query =" select notice_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
-						" from a20_track2_web_notice "+
-						"where notice_no = '"+noticeNo+"' ";
+		String query =" select n.notice_no, n.title, n.content, m.name, to_char(n.reg_date, 'yyyy-mm-dd'), n.hit "+
+						" from a20_track2_web_notice n, a20_track2_web_member m "+
+						" where n.reg_id = m.id "+
+						" and n.notice_no = '"+noticeNo+"'";		
+		
 		Notice_DTO dtoN = null;				
 		try{
 			con = common.getConnection();

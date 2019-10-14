@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
+<%@ include file="/common_session_info.jsp"%>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -197,9 +199,29 @@ body {
 <body>
 <div id="con">
 	<ul class="top_right">
-		<li><a href="">JOIN</a></li>
-		<li><a href="">LOGIN</a></li>
-		<li><a href="">HOME</a></li>
+		<li><a href="/member/member_w.jsp">JOIN</a></li>
+	<%
+		if(!sessionName.equals("")){
+	%>
+		<li><a href="/member/member_myinfo.jsp">MYPAGE</a></li>
+		<li><a href="/member/member_logout.jsp">LOGOUT</a></li>
+	<%
+		} else {
+	%>
+		<li><a href="/member/member_login.jsp">LOGIN</a></li>
+	<%
+		}
+	%>
+		<li><a href="/index.jsp">HOME</a></li>
+		<li><a>
+	<%
+		if(!sessionName.equals("")){			
+	%>
+		[<%=sessionName%>]님
+	<%	
+		}
+	%>
+		</a></li>
 	</ul>
 	<div id="header">
 		<ul class="header_menu">
@@ -240,10 +262,10 @@ body {
 					</ul>
 				</div>
 			</li>
-			<li class="menu5"><a href="notice/notice_r.html">커뮤니티</a>
+			<li class="menu5"><a href="/notice/notice_r.jsp">커뮤니티</a>
 				<div id="s_div_5">
 					<ul>
-						<li><a href="notice/notice_r.html">NOTICE</a></li>
+						<li><a href="/notice/notice_r.jsp">NOTICE</a></li>
 						<li><a href="">NEWS</a></li>
 						<li><a href="">FREEBOARD</a></li>
 						<li><a href="">QNA</a></li>
@@ -263,8 +285,8 @@ body {
 	</div> -->
 	<div id="contents">
 		<ul>
-			<li><i class="fas fa-bell fa-lg"></i><a href="notice/notice_r.html">&nbsp; NOTICE</a></li>
-			<li><i class="fas fa-bullhorn fa-lg"></i><a href="news/news_r.jsp">&nbsp; NEWS</a></li>
+			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
+			<li><i class="fas fa-bullhorn fa-lg"></i><a href="/news/news_r.jsp">&nbsp; NEWS</a></li>
 			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
 			<li><i class="fab fa-quora fa-lg"></i><a href="">&nbsp; QNA</a></li>
 		</ul>	

@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp"%>
 <%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
+<%@ include file="/common/sessionCheckManager.jsp" %>
 <%	
 	request.setCharacterEncoding("UTF-8");	
 	String notice_no = request.getParameter("t_noticeNo");

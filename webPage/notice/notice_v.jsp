@@ -127,8 +127,14 @@ td.title{
 		<div class="buttons">
 				<p>
 					<a href="notice_r.jsp">목 록</a>
+					<%
+						if(sessionId.equals("manager")){
+					%>
 					<a href="notice_u.jsp?t_noticeNo=<%=dtoN.getNotice_no()%>">수 정</a>
 					<a href="javascript:deleteNotice()">삭 제</a>
+					<%
+						}
+					%>
 				</p>
 
 			</div>

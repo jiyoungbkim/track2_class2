@@ -1,5 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ page import="dao.Notice_DAO,dto.Notice_DTO,common.CommonUtil"%>
+<%@ include file="/common_session_info.jsp"%>
+<%@ include file="/common/sessionCheckManager.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");	
 	Notice_DAO dao = new Notice_DAO();
@@ -13,7 +15,8 @@
 	String content 		= request.getParameter("t_content");
 	if(content != null ) content = content.replaceAll("\'","\''");
 	String file_name_1  = "";
-	String reg_id 		= request.getParameter("t_reg_id");
+	//String reg_id 		= request.getParameter("t_reg_id");
+	String reg_id 		= sessionId;
 	if(reg_id != null) reg_id.replaceAll("\'","\''");
 	String reg_date 	= CommonUtil.getToday();
 	

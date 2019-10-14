@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
+
 <%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO,common.CommonUtil"%>
 <%	
 	request.setCharacterEncoding("UTF-8");	
@@ -15,7 +16,7 @@
 	ArrayList<Notice_DTO> arrN = dao.getNoticeList(selValue,txtValue);
 
 	int nHit = dao.noticeHit(notice_no);
-	
+
 //*********page start***********/
 	String tdCount ="5";				
 
@@ -208,8 +209,15 @@ td.title{
 				<%
 					url = "notice_r.jsp?t_sel="+selValue+"&t_search="+txtValue;		
 					out.println(CommonUtil.pageList(current_page, total_page, url));
+					
+				%>
+				<%
+					if(sessionId.equals("manager")){
 				%>
 				<a href="notice_w.jsp" class="btn_write">글쓰기</a>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>

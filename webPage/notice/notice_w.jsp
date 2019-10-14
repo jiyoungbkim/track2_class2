@@ -1,5 +1,16 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
+<%@ include file="/common/sessionCheckManager.jsp" %>
+<%
+	if(!sessionLevel.equals("manager")){
+%>
+	<script>
+		alert("관리자 화면입니다");
+		location.href = "/index.jsp";
+	</script>	
+<%	
+	}
+%>
 <div id="con">
 	<div id="menu_bar">
 		<ul>
@@ -69,15 +80,15 @@ td.title{
 	function save() {
 		var fm = document.notice;
 		//alert(fm.t_title.value);
-		if(fm.t_reg_id.value == ""){
-			alert("작성자 입력!");
-			fm.t_reg_id.focus();
-			return;
-		}
+		//if(fm.t_reg_id.value == ""){
+		//	alert("작성자 입력!");
+		//	fm.t_reg_id.focus();
+		//	return;
+		//}
 		if(fm.t_title.value == ""){
 			alert("제목 입력!");
 			fm.t_title.focus();
-			return;
+			 return;
 		}
 		if(fm.t_content.value == ""){
 			alert("내용 입력!");
@@ -107,7 +118,7 @@ td.title{
 				<thead>
 					<tr>
 						<th>작성자</th>
-						<td><input name="t_reg_id" type="text" size="90%"></td>
+						<td><%=sessionName%></td>
 					</tr>
 				</thead>
 				<tbody>

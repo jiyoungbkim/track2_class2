@@ -26,17 +26,17 @@
 	if(att_print == null) att_print = "";
 	if(att_beam == null) att_beam = "";
 	String update_date = "";
-	
+	String status ="y";
 	//int result = 0;
 	//result = dao.insertMember(id, pw, name, birth, area, address, telecom, phone_1, phone_2, phone_3,
 			//email_1, email_2, att_desk, att_note, att_print, att_beam, reg_date, update_date);
 												
 	String query = "insert into a20_track2_web_member(id, pw, name, birth, area, address, telecom, "+
                     " phone_1, phone_2, phone_3, email_1, email_2, att_desk, att_note, att_print, att_beam, "+
-                    " reg_date, update_date) "+
+                    " reg_date, update_date, status) "+
                     " values('"+id+"','"+pw+"','"+name+"','"+birth+"','"+area+"','"+address+"','"+telecom+"', "+
                     " '"+phone_1+"','"+phone_2+"','"+phone_3+"','"+email_1+"','"+email_2+"', "+
-                    " '"+att_desk+"','"+att_note+"','"+att_print+"','"+att_beam+"','"+reg_date+"','"+update_date+"')";
+                    " '"+att_desk+"','"+att_note+"','"+att_print+"','"+att_beam+"','"+reg_date+"','"+update_date+"','"+status+"')";
     int result = 0;
 	result = dao.insertMember(query);
     out.print(query);
