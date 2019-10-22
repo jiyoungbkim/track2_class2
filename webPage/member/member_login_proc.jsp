@@ -15,7 +15,7 @@
 		if(id.equals("manager")){
 			session.setAttribute("session_level","manager");
 		}
-		session.setMaxInactiveInterval(60*60);
+		session.setMaxInactiveInterval(60*60*1);
 	}
 %>
 <html>

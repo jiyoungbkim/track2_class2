@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
+<%@ include file="/common/sessionCheckManager.jsp" %>
 <div id="con">
 <style>
 #menu_bar ul li i{

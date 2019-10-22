@@ -89,8 +89,8 @@ public class Notice_DAO {
 	// 공지사항 등록 dto
 	public int insertNotice(Notice_DTO dto) {
 		
-		String query = "insert into a20_track2_web_notice(notice_no, title, content, reg_id, reg_date) "+
-					" values ('"+dto.getNotice_no()+"','"+dto.getTitle()+"','"+dto.getContent()+"', "+
+		String query = "insert into a20_track2_web_notice(notice_no, title, content, file_name_1, reg_id, reg_date) "+
+					" values ('"+dto.getNotice_no()+"','"+dto.getTitle()+"','"+dto.getContent()+"', '"+dto.getFile_name_1()+"', "+
 					" '"+dto.getReg_id()+"','"+dto.getReg_date()+"') ";
 		int result = 0;
 		try {

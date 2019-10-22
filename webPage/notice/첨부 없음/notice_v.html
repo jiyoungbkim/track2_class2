@@ -1,6 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
-<%@ include file="/common_session_info.jsp"%>
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -54,21 +52,15 @@
 	//]]>
 </script>
 <style>
-*{margin : 0; padding : 0;}
-li {
-	list-style-type:none;
-}
-a{
-	text-decoration:none;
-}
+
 body {
 	font : 12px "고딕", Gothic ;
-	//background : url("images/bg_grid.gif");
+	background : url("images/bg_grid.gif");
 	}
 #con {
 	width : 940px ;
-	//height : 880px;
 	margin: 0px auto;
+	//height : 880px;
 	//background : #ff6699;
 	padding : 20px;
 	clear : both;
@@ -78,15 +70,23 @@ body {
 	width : 940px ;
 	height : 140px ;
 	//padding : 20px;
-	background : url("images/header.png");
+	background : url("../images/header.png");
 	//background-size : 100%;
 	margin-bottom : 20px;
 	
 }
+#menu_bar {
+	float : left;
+	//display:inline-block;
+	width : 110px;
+	//height : 460px;
+	padding : 20px;
+	//background : #996699;
+}
 #contents {	
 	float : right;
-	width : 900px;
-	height : 460px;
+	width : 748px;
+	//height : 460px;
 	padding : 20px;
 	//background : #3366ff;
 	margin-bottom : 20px;
@@ -98,7 +98,7 @@ body {
 	width : 900px;
 	//height : 60px;
 	padding : 20px;
-	background : #ffff33;
+	background : #ff6699;
 }
 
 .top_right {
@@ -175,15 +175,11 @@ body {
 	color : #fff;
 	text-align : justify;
 }
-#contents ul li i{
-	align : right;
+#menu_bar ul li i{
 	color : #666;
 	vertical-align: middle;
 	size : 5px;
 	line-height : 40px;
-}
-#contents ul li a{
-	text-align : left;
 }
 .p3 {
 	color : #ccc;
@@ -193,35 +189,14 @@ body {
 	color : white;
 	vertical-align: middle;
 }
-
 </style>
 </head>
 <body>
 <div id="con">
 	<ul class="top_right">
-		<li><a href="/member/member_w.jsp">JOIN</a></li>
-	<%
-		if(!sessionName.equals("")){
-	%>
-		<li><a href="/member/member_myinfo.jsp">MYPAGE</a></li>
-		<li><a href="/member/member_logout.jsp">LOGOUT</a></li>
-	<%
-		} else {
-	%>
-		<li><a href="/member/member_login.jsp">LOGIN</a></li>
-	<%
-		}
-	%>
-		<li><a href="/index.jsp">HOME</a></li>
-		<li><a>
-	<%
-		if(!sessionName.equals("")){			
-	%>
-		[<%=sessionName%>]님
-	<%	
-		}
-	%>
-		</a></li>
+		<li><a href="">JOIN</a></li>
+		<li><a href="">LOGIN</a></li>
+		<li><a href="">HOME</a></li>
 	</ul>
 	<div id="header">
 		<ul class="header_menu">
@@ -262,66 +237,121 @@ body {
 					</ul>
 				</div>
 			</li>
-			<li class="menu5"><a href="/notice/notice_r.jsp">커뮤니티</a>
+			<li class="menu5"><a href="notice_r.html">커뮤니티</a>
 				<div id="s_div_5">
 					<ul>
-						<li><a href="/notice/notice_r.jsp">NOTICE</a></li>
-						<li><a href="/news/news_r.jsp">NEWS</a></li>
-						<li><a href="/freeboard/freeboard_r.jsp">FREEBOARD</a></li>
-						<li><a href="/qanda/qanda_r.jsp">QNA</a></li>
+						<li><a href="notice_r.html">NOTICE</a></li>
+						<li><a href="">NEWS</a></li>
+						<li><a href="">FREEBOARD</a></li>
+						<li><a href="">QNA</a></li>
 					</ul>
 				</div>
 			</li>
 		</ul>
 	</div>	
-<!-- 	
-	<div id="menu-icon">
+	<div id="menu_bar">
 		<ul>
-			<li><i class="fas fa-bell fa-lg"></i><a href="notice/notice_r.html">&nbsp; NOTICE</a></li>
+			<li><i class="fas fa-bell fa-lg"></i><a href="notice_r.html">&nbsp; NOTICE</a></li>
 			<li><i class="fas fa-bullhorn fa-lg"></i><a href="">&nbsp; NEWS</a></li>
 			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
 			<li><i class="fab fa-quora fa-lg"></i><a href="">&nbsp; QNA</a></li>
 		</ul>
-	</div> -->
-	<div id="contents">
-		<ul>
-			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
-			<li><i class="fas fa-bullhorn fa-lg"></i><a href="/news/news_r.jsp">&nbsp; NEWS</a></li>
-			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
-			<li><i class="fab fa-quora fa-lg"></i><a href="/qanda/qanda_r.jsp">&nbsp; QNA</a></li>
-		</ul>	
 	</div>
 <style>
-#footer{
-	background :#42464d;
-	padding-top:10px;
-	//padding-bottom:10px;
+.board_list { padding-top:10px; }
+.board_table{ width: 100%; font-size : 12px;}
+
+.board_list th{
+	padding: 10px;
 }
-#footer .address {
-	font-style:normal;
-	color:#ababb1;
-	margin-bottom:10px;
+.board_table td{
+	text-align:left;
+	padding : 7px;
+	border-top:1px solid #848484;
+	border-bottom:1px solid #848484;
 }
-#footer .address .title{
-	font-size:14px;
-	margin-bottom:8px;
-	color:#fff;
+td.title{
+	text-align : left;
 }
-#footer .copyright{
-	color:#fff;
+.home_icon{
+	width : 13px;
 }
-</style>		
-	
-	<div id="footer">
-		<address class="address">
-			<p class="title">본사</p>
-			(우)12345 대전광역시 중구 계롱로 825
-			(용두동, 희영빌딩) 5층, 6층/ 고객센터: 042-242-4412
-			<br>사업자등록번호: 305-86-06709
-		</address>
-		<p class="copyright">Copyright &copy;
-		JSL 전자개발주식회사. All rights reserved.</p>
+#contents p {
+	font-size : 11px;
+}
+#contents tr, a{
+	font : 11px;
+	color : #848484;
+}
+
+.search{
+	float: right;
+	margin-bottom: 5px;
+}
+.search select, input {
+	color:#666;
+	vertical-align:middle;
+	height : 23px;
+}
+.textarea{
+	overflow:hidden;		
+	width : 100%;
+	height : 300px;
+	resize : none;
+}
+.buttons {
+	width : 100%;
+	align : center;
+	text-align : center;	
+}
+.buttons p a{
+	align : justify;
+	background : #3366ff;
+	color : white;
+	margin-top : 20px;
+	padding : 10px 20px;
+}
+</style>
+	<div id="contents">
+		<p>
+			<img src="../images/home3.png" class="home_icon">
+			 HOME | COMMUNITY | NOTICE
+		</p>
+		<div class="board_list">
+			<table class="board_table">
+				<colgroup>
+					<col width="10%">
+					<col width="*">
+					<col width="20%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>제목</th>
+						<td>규매절차에 대해 알고 싶어오</td>
+						<td>조회수 : 170</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>내용</th>
+						<td colspan="2"><textarea class="textarea" readonly>wsegfutotototouyrururtuetet
+						</textarea></td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+		<br>
+		<div class="buttons">
+				<p>
+					<a href="notice_r.html">목록</a>
+					<a href="notice_w.html">수정</a>
+				</p>
+
+			</div>
 	</div>
+<style>
+</style>
+
 </div>
 </body>
 </html>

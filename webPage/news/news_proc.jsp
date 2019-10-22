@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ page import="dao.News_DAO,dto.News_DTO,common.CommonUtil"%>
+<%@ include file="/common/sessionCheckManager.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");	
 	News_DAO dao = new News_DAO();

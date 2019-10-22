@@ -1,6 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
-<%@ include file="/common_session_info.jsp"%>
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -54,21 +52,15 @@
 	//]]>
 </script>
 <style>
-*{margin : 0; padding : 0;}
-li {
-	list-style-type:none;
-}
-a{
-	text-decoration:none;
-}
+
 body {
 	font : 12px "고딕", Gothic ;
-	//background : url("images/bg_grid.gif");
+	background : url("images/bg_grid.gif");
 	}
 #con {
 	width : 940px ;
-	//height : 880px;
 	margin: 0px auto;
+	//height : 880px;
 	//background : #ff6699;
 	padding : 20px;
 	clear : both;
@@ -78,15 +70,24 @@ body {
 	width : 940px ;
 	height : 140px ;
 	//padding : 20px;
-	background : url("images/header.png");
+	background : url("../images/header.png");
 	//background-size : 100%;
 	margin-bottom : 20px;
 	
 }
+#menu_bar {
+	float : left;
+	//display:inline-block;
+	width : 110px;
+	//height : 460px;
+	padding : 20px;
+	//background : #996699;
+	
+}
 #contents {	
 	float : right;
-	width : 900px;
-	height : 460px;
+	width : 748px;
+	//height : 460px;
 	padding : 20px;
 	//background : #3366ff;
 	margin-bottom : 20px;
@@ -98,7 +99,7 @@ body {
 	width : 900px;
 	//height : 60px;
 	padding : 20px;
-	background : #ffff33;
+	background : #ff6699;
 }
 
 .top_right {
@@ -175,53 +176,29 @@ body {
 	color : #fff;
 	text-align : justify;
 }
-#contents ul li i{
-	align : right;
+#menu_bar ul li i{
 	color : #666;
 	vertical-align: middle;
 	size : 5px;
 	line-height : 40px;
 }
-#contents ul li a{
-	text-align : left;
+#menu_bar ul li{
+	border-bottom : #999 1px;
 }
+
 .p3 {
 	color : #ccc;
 }
-.icon {
-	width : 23px;
-	color : white;
-	vertical-align: middle;
-}
+
 
 </style>
 </head>
 <body>
 <div id="con">
 	<ul class="top_right">
-		<li><a href="/member/member_w.jsp">JOIN</a></li>
-	<%
-		if(!sessionName.equals("")){
-	%>
-		<li><a href="/member/member_myinfo.jsp">MYPAGE</a></li>
-		<li><a href="/member/member_logout.jsp">LOGOUT</a></li>
-	<%
-		} else {
-	%>
-		<li><a href="/member/member_login.jsp">LOGIN</a></li>
-	<%
-		}
-	%>
-		<li><a href="/index.jsp">HOME</a></li>
-		<li><a>
-	<%
-		if(!sessionName.equals("")){			
-	%>
-		[<%=sessionName%>]님
-	<%	
-		}
-	%>
-		</a></li>
+		<li><a href="">JOIN</a></li>
+		<li><a href="">LOGIN</a></li>
+		<li><a href="../index.html">HOME</a></li>
 	</ul>
 	<div id="header">
 		<ul class="header_menu">
@@ -262,34 +239,207 @@ body {
 					</ul>
 				</div>
 			</li>
-			<li class="menu5"><a href="/notice/notice_r.jsp">커뮤니티</a>
+			<li class="menu5"><a href="notice_r.html">커뮤니티</a>
 				<div id="s_div_5">
 					<ul>
-						<li><a href="/notice/notice_r.jsp">NOTICE</a></li>
-						<li><a href="/news/news_r.jsp">NEWS</a></li>
-						<li><a href="/freeboard/freeboard_r.jsp">FREEBOARD</a></li>
-						<li><a href="/qanda/qanda_r.jsp">QNA</a></li>
+						<li><a href="notice_r.html">NOTICE</a></li>
+						<li><a href="">NEWS</a></li>
+						<li><a href="">FREEBOARD</a></li>
+						<li><a href="">QNA</a></li>
 					</ul>
 				</div>
 			</li>
 		</ul>
-	</div>	
-<!-- 	
-	<div id="menu-icon">
+	</div>
+
+	<div id="menu_bar">
+		
 		<ul>
-			<li><i class="fas fa-bell fa-lg"></i><a href="notice/notice_r.html">&nbsp; NOTICE</a></li>
+			<li><i class="fas fa-bell fa-lg"></i><a href="notice_r.html">&nbsp; NOTICE</a></li>
 			<li><i class="fas fa-bullhorn fa-lg"></i><a href="">&nbsp; NEWS</a></li>
 			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
 			<li><i class="fab fa-quora fa-lg"></i><a href="">&nbsp; QNA</a></li>
 		</ul>
-	</div> -->
+	</div>
+<style>
+.board_list { padding-top:10px; }
+.board_table{ width: 100%; font-size : 12px;}
+
+.board_list th{
+	border-top:1px solid #848484;
+	border-bottom: 1px solid #848484;
+	padding: 10px;
+}
+.board_table td{
+	text-align:center;
+	padding : 7px;
+	border-bottom:1px solid #e0e0e0;
+}
+td.title{
+	text-align : left;
+}
+.home_icon{
+	width : 13px;
+}
+#contents p {
+	font-size : 11px;
+}
+#contents tr, a{
+	font : 11px;
+	color : #848484;
+}
+
+.search{
+	float: right;
+	margin-bottom: 5px;
+}
+.search select, input {
+	color:#666;
+	vertical-align:top;
+	height : 23px;
+}
+.paging {
+	padding-top:30px; 
+	text-align:center;
+}
+.paging a {
+	padding:10px; 
+	border:1px solid #e0e0e0;
+}
+.paging a.active {
+	background:#007dc6;
+	color:#fff
+}
+.paging .btn_write{
+	background : #123454;
+	padding : 10px 16px;
+	color : #fff;
+	float : right;
+}
+</style>
 	<div id="contents">
-		<ul>
-			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
-			<li><i class="fas fa-bullhorn fa-lg"></i><a href="/news/news_r.jsp">&nbsp; NEWS</a></li>
-			<li><i class="fas fa-file-alt fa-lg"></i><a href="">&nbsp; FREEBOARD</a></li>
-			<li><i class="fab fa-quora fa-lg"></i><a href="/qanda/qanda_r.jsp">&nbsp; QNA</a></li>
-		</ul>	
+		<p>
+			<img src="../images/home3.png" class="home_icon">
+			 HOME | COMMUNITY | NOTICE
+			<div class="search">
+				<select>
+					<option>제목</option>
+					<option>내용</option>
+					<option>작성자</option>
+				</select>
+				<input type="text" style="height:19px">
+				<input type="button" value=" 검 색 " style="width: 60px"/>
+			</div>
+			
+		</p>
+		<p>
+			
+		</p>
+		
+		<div class="board_list">
+			<table class="board_table">
+				<colgroup>
+					<col width="10%">
+					<col width="*">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>10</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="title"><a href="">구매절차</a></td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="title">구매절차</td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="title">구매절차</td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td class="title">구매절차</td>
+						<td>관리자</td>
+						<td>19-09-17</td>
+						<td>125</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="paging">
+				<a href=""><i class="fa fa-angle-double-left"></i></a>
+				<a href=""><i class="fa fa-angle-left"></i></a>
+				<a href="" class="active">1</a>
+				<a href="">2</a>
+				<a href="">3</a>
+				<a href="">4</a>
+				<a href="">5</a>
+				<a href=""><i class="fa fa-angle-right"></i></a>
+				<a href=""><i class="fa fa-angle-double-right"></i></a>
+				<a href="notice_w.html" class="btn_write">글쓰기</a>
+			</div>
+		</div>
 	</div>
 <style>
 #footer{
@@ -310,8 +460,8 @@ body {
 #footer .copyright{
 	color:#fff;
 }
-</style>		
-	
+
+</style>
 	<div id="footer">
 		<address class="address">
 			<p class="title">본사</p>

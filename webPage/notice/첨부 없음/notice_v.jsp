@@ -1,24 +1,13 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
-<%@ page import="java.util.*,dao.News_DAO,dto.News_DTO"%>
+<%@ page import="java.util.*,dao.Notice_DAO,dto.Notice_DTO"%>
 <%
-	String news_no = request.getParameter("t_newsNo");
-	News_DAO dao = new News_DAO();
-	int wHit = dao.newsHit(news_no);
-	News_DTO dtoW = dao.getNewsView(news_no);
+	String notice_no = request.getParameter("t_noticeNo");
+	Notice_DAO dao = new Notice_DAO();
+	int nHit = dao.noticeHit(notice_no);
+	Notice_DTO dtoN = dao.getNoticeView(notice_no);
 %>
 <div id="con">
-<style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -37,6 +26,7 @@
 .board_table td{
 	text-align:left;
 	padding : 7px;
+	
 }
 .cover{
 	border-top:1px solid #848484;
@@ -55,7 +45,6 @@ td.title{
 	font : 11px;
 	color : #848484;
 }
-
 .search{
 	float: right;
 	margin-bottom: 5px;
@@ -86,12 +75,12 @@ td.title{
 }
 </style>
 <script>
-	function deleteNews(){
+	function deleteNotice(){
 		var yn = confirm("정말 삭제 하겠습니까? ");
 		if(yn) {
 			var fm = document.notice;
 			//fm.action = "notice_delete.jsp";
-			fm.action = "news_proc.jsp";
+			fm.action = "notice_proc.jsp";
 			fm.method = "post";
 			fm.submit();
 		}
@@ -99,12 +88,12 @@ td.title{
 </script>
 	<form name="notice">
 		<input type="hidden" name="t_work_gubun" value="delete">
-		<input type="hidden" name="t_news_no" value="<%=news_no%>">
+		<input type="hidden" name="t_notice_no" value="<%=notice_no%>">
 	</form>
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NEWS
+			 HOME | COMMUNITY | NOTICE
 		</p>
 		
 		<div class="board_list">
@@ -117,19 +106,19 @@ td.title{
 				<thead>				
 					<tr>
 						<th>제목</th>
-						<td class="cover"><%=dtoW.getTitle()%></td>
-						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoW.getHit()%></td>
+						<td class="cover"><%=dtoN.getTitle()%></td>
+						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoN.getHit()%></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>내용</th>
-						<td colspan="2"><textarea class="textarea" readonly><%=dtoW.getContent()%></textarea></td>
+						<td colspan="2"><textarea class="textarea" readonly><%=dtoN.getContent()%></textarea></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td class="cover"><%=dtoW.getReg_id()%></td>
-						<td class="cover"> 등록일자 : <%=dtoW.getReg_date()%></tr>
+						<td class="cover"><%=dtoN.getReg_id()%></td>
+						<td class="cover"> 등록일자 : <%=dtoN.getReg_date()%></tr>
 					</tr>
 				</tbody>
 			</table>			
@@ -137,12 +126,12 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="news_r.jsp">목 록</a>
+					<a href="notice_r.jsp">목 록</a>
 					<%
 						if(sessionId.equals("manager")){
 					%>
-					<a href="news_u.jsp?t_newsNo=<%=dtoW.getNews_no()%>">수 정</a>
-					<a href="javascript:deleteNews()">삭 제</a>
+					<a href="notice_u.jsp?t_noticeNo=<%=dtoN.getNotice_no()%>">수 정</a>
+					<a href="javascript:deleteNotice()">삭 제</a>
 					<%
 						}
 					%>

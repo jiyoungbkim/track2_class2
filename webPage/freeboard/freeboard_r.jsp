@@ -1,10 +1,11 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
-<%@ page import="java.util.*,dao.News_DAO,dto.News_DTO,common.CommonUtil"%>
+
+<%@ page import="java.util.*,dao.Freeboard_DAO,dto.Freeboard_DTO,common.CommonUtil"%>
 <%	
 	request.setCharacterEncoding("UTF-8");	
-	String news_no = request.getParameter("t_newsNo");
-	News_DAO dao = new News_DAO();
+	String freeboard_no = request.getParameter("t_freeboardNo");
+	Freeboard_DAO dao = new Freeboard_DAO();
 	
 	String selValue = request.getParameter("t_sel");
 	String txtValue = request.getParameter("t_search");
@@ -12,9 +13,9 @@
 		selValue ="title";
 		txtValue ="";
 	}
-	ArrayList<News_DTO> arrW = dao.getNewsList(selValue,txtValue);
+	ArrayList<Freeboard_DTO> arrN = dao.getFreeboardList(selValue,txtValue);
 
-	int wHit = dao.newsHit(news_no);
+	int nHit = dao.freeboardHit(freeboard_no);
 
 //*********page start***********/
 	String tdCount ="5";				
@@ -31,8 +32,8 @@
 	String		url				= null;	
 
 	// 조회된 건수 구하기  total_count : 설정
-	if(arrW == null) total_count =0;
-	else total_count = arrW.size(); 
+	if(arrN == null) total_count =0;
+	else total_count = arrN.size(); 
 
 
 	// 페이지번호가 없으면 1페이지로 간주
@@ -53,22 +54,14 @@
 		for_count	= a_count - list_setup_count;
 	}
 	if(total_page * list_setup_count != total_count)   total_page = total_page +1;
-//*********page end***********/	
+//*********page end***********/
 	
 %>
 <div id="con">
 <style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
 
+</style>
+<!--<%="========="+txtValue%>-->
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -113,22 +106,48 @@ td.title{
 	vertical-align:top;
 	height : 23px;
 }
+/* .paging {
+	padding-top:30px; 
+	text-align:center;
+}
+.paging a {
+	padding:10px; 
+	border:1px solid #e0e0e0;
+}
+.paging a.active {
+	background:#007dc6;
+	color:#fff
+}
+.paging .btn_write{
+	background : #123454;
+	padding : 10px 16px;
+	color : #fff;
+	float : right;
+} */
 </style>
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NEWS
+			 HOME | COMMUNITY | FREEBOARD
 		</p>
 <script>
-
+	function formSearch(){
+		var fm = document.notice;
+		fm.action = "freeboard_r.jsp";
+		fm.method = "post";
+		
+		//alert(fm.t_sel.value);
+		//alert(fm.t_search.value);
+		fm.submit();
+	}
 </script>
 		<form name="notice">
 			<div class="search">
 				<select name="t_sel">
-					<option value="title" >제목</option>
-					<option value="content">내용</option>
+					<option value="title" <%if(selValue.equals("title")) out.print("selected");%>>제목</option>
+					<option value="content" <%if(selValue.equals("content")) out.print("selected");%>>내용</option>
 				</select>
-				<input type="text" name="t_search" style="height:17px">
+				<input type="text" value="<%=txtValue%>" name="t_search" style="height:17px">
 				<input type="button" onClick="javascript:formSearch()" value=" 검 색 " style="width: 60px"/>
 			</div>
 		</form>	
@@ -158,15 +177,15 @@ td.title{
 
 				%> 	
 					<tr>
-						<td><a href="news_v.jsp?t_newsNo=<%=arrW.get(k).getNews_no()%>">
-						<%=arrW.get(k).getNews_no()%></td>
+						<td><a href="freeboard_v.jsp?t_freeboardNo=<%=arrN.get(k).getFreeboard_no()%>">
+						<%=arrN.get(k).getFreeboard_no()%></td>
 						<td class="title">
-						<a href="news_v.jsp?t_newsNo=<%=arrW.get(k).getNews_no()%>">
-						<%=arrW.get(k).getTitle()%>
+						<a href="freeboard_v.jsp?t_freeboardNo=<%=arrN.get(k).getFreeboard_no()%>">
+						<%=arrN.get(k).getTitle()%>
 						</a></td>
-						<td><%=arrW.get(k).getReg_id()%></td>
-						<td><%=arrW.get(k).getReg_date()%></td>
-						<td><%=arrW.get(k).getHit()%></td>
+						<td><%=arrN.get(k).getReg_id()%></td>
+						<td><%=arrN.get(k).getReg_date()%></td>
+						<td><%=arrN.get(k).getHit()%></td>
 					</tr>
 				<%
 							v_count = v_count + 1;
@@ -188,20 +207,46 @@ td.title{
 			</table>
 			<div class="paging">
 				<%
-					url = "news_r.jsp?t_sel="+selValue+"&t_search="+txtValue;		
+					url = "freeboard_r.jsp?t_sel="+selValue+"&t_search="+txtValue;		
 					out.println(CommonUtil.pageList(current_page, total_page, url));
+					
 				%>
-				<%
-					if(sessionId.equals("manager")){
-				%>
-				<a href="news_w.jsp" class="btn_write">글쓰기</a>
-				<%
-					}
-				%>
+				<a href="freeboard_w.jsp" class="btn_write">글쓰기</a>
+
 			</div>
 		</div>
 	</div>
-	<%@ include file="/common_footer.jsp" %>
+<style>
+/* #footer{
+	background :#42464d;
+	padding-top:10px;
+	//padding-bottom:10px;
+}
+#footer .address {
+	font-style:normal;
+	color:#ababb1;
+	margin-bottom:10px;
+}
+#footer .address .title{
+	font-size:14px;
+	margin-bottom:8px;
+	color:#fff;
+}
+#footer .copyright{
+	color:#fff;
+} */
+</style>
+<%@ include file="/common_footer.jsp" %>
+	<!-- <div id="footer">
+		<address class="address">
+			<p class="title">본사</p>
+			(우)12345 대전광역시 중구 계롱로 825
+			(용두동, 희영빌딩) 5층, 6층/ 고객센터: 042-242-4412
+			<br>사업자등록번호: 305-86-06709
+		</address>
+		<p class="copyright">Copyright &copy;
+		JSL 전자개발주식회사. All rights reserved.</p>
+	</div> -->
 </div>
 </body>
 </html>

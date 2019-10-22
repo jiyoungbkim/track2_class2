@@ -96,8 +96,8 @@ td.title{
 			return;
 		}
 		<!--document.notice.action = "notice_proc.jsp";-->
-		fm.action = "notice_proc.jsp";
-		//fm.action = "notice_insert.jsp";
+		//fm.action = "notice_proc.jsp";
+		fm.action = "notice_insert.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -107,12 +107,12 @@ td.title{
 			<img src="/images/home3.png" class="home_icon">
 			 HOME | COMMUNITY | NOTICE
 		</p>
-		<form name="notice">
+		<form name="notice" enctype="multipart/form-data">
 		<input type="hidden" name="t_work_gubun" value="insert">
 		<div class="board_list">
 			<table class="board_table">
 				<colgroup>
-					<col width="10%" />
+					<col width="40%" />
 					<col width="*" />
 				</colgroup>
 				<thead>
@@ -129,6 +129,10 @@ td.title{
 					<tr>
 						<th>내용</th>
 						<td><textarea name="t_content" class="textarea"></textarea></td> <!---->
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td><input type="file" name="fileName_a"></td> <!---->
 					</tr>
 				</tbody>
 			</table>			

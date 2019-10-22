@@ -1,24 +1,15 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
-<%@ page import="java.util.*,dao.News_DAO,dto.News_DTO"%>
+<%@ page import="java.util.*,dao.QandA_DAO,dto.QandA_DTO,common.CommonUtil"%>
 <%
-	String news_no = request.getParameter("t_newsNo");
-	News_DAO dao = new News_DAO();
-	int wHit = dao.newsHit(news_no);
-	News_DTO dtoW = dao.getNewsView(news_no);
+	String qanda_no = request.getParameter("t_qandaNo");
+	QandA_DAO dao = new QandA_DAO();
+	int nHit = dao.qandaHit(qanda_no);
+	QandA_DTO dtoQ = dao.getQandaView(qanda_no);
+
 %>
+
 <div id="con">
-<style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
@@ -37,6 +28,7 @@
 .board_table td{
 	text-align:left;
 	padding : 7px;
+	
 }
 .cover{
 	border-top:1px solid #848484;
@@ -55,7 +47,6 @@ td.title{
 	font : 11px;
 	color : #848484;
 }
-
 .search{
 	float: right;
 	margin-bottom: 5px;
@@ -68,7 +59,7 @@ td.title{
 .textarea{
 	overflow:hidden;		
 	width : 100%;
-	height : 300px;
+	height : 200px;
 	resize : none;
 	font-size : 11px;
 }
@@ -86,25 +77,37 @@ td.title{
 }
 </style>
 <script>
-	function deleteNews(){
+	function update() {
+		var fm = document.qanda;
+		
+		if(fm.t_answer.value == ""){
+			alert("답변 입력!");
+			fm.t_answer.focus();
+			return;
+		}
+		fm.action = "qanda_proc.jsp";
+		fm.method = "post";
+		fm.submit();
+	}
+	function answerDelete(){
 		var yn = confirm("정말 삭제 하겠습니까? ");
 		if(yn) {
-			var fm = document.notice;
+			var fm = document.qanda;
 			//fm.action = "notice_delete.jsp";
-			fm.action = "news_proc.jsp";
+			fm.action = "qanda_answer_proc.jsp";
 			fm.method = "post";
 			fm.submit();
 		}
 	}
 </script>
-	<form name="notice">
-		<input type="hidden" name="t_work_gubun" value="delete">
-		<input type="hidden" name="t_news_no" value="<%=news_no%>">
-	</form>
+	<form name="qanda">
+		<input type="hidden" name="t_work_gubun" value="replay">
+		<input type="hidden" name="t_qanda_no" value="<%=qanda_no%>">
+	
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NEWS
+			 HOME | COMMUNITY | QANDA
 		</p>
 		
 		<div class="board_list">
@@ -117,32 +120,39 @@ td.title{
 				<thead>				
 					<tr>
 						<th>제목</th>
-						<td class="cover"><%=dtoW.getTitle()%></td>
-						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoW.getHit()%></td>
+						<td class="cover"><%=dtoQ.getTitle()%></td>
+						<td class="cover"><i class="fa fa-eye"> 조회수 : <%=dtoQ.getHit()%></td>
 					</tr>
+					
 				</thead>
 				<tbody>
-					<tr>
-						<th>내용</th>
-						<td colspan="2"><textarea class="textarea" readonly><%=dtoW.getContent()%></textarea></td>
+				<tr>
+					<th>작성자</th>
+						<td class="cover"><%=dtoQ.getUser_id()%></td>
+						<td class="cover"> 등록일자 : <%=dtoQ.getReg_date_q()%></tr>
 					</tr>
 					<tr>
-						<th>작성자</th>
-						<td class="cover"><%=dtoW.getReg_id()%></td>
-						<td class="cover"> 등록일자 : <%=dtoW.getReg_date()%></tr>
+						<th>질문</th>
+						<td colspan="2"><textarea class="textarea" readonly><%=dtoQ.getQuestion()%></textarea></td>
 					</tr>
+					<tr>
+						<th>답변</th>
+						<td colspan="2"><textarea name="t_answer" class="textarea" <%if(!sessionId.equals("manager"))out.print("readonly");%>><%=dtoQ.getAnswer()%></textarea></td>
+					</tr>
+					
 				</tbody>
 			</table>			
 		</div>
+		</form>
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="news_r.jsp">목 록</a>
+					<a href="qanda_r.jsp">목 록</a>
 					<%
 						if(sessionId.equals("manager")){
 					%>
-					<a href="news_u.jsp?t_newsNo=<%=dtoW.getNews_no()%>">수 정</a>
-					<a href="javascript:deleteNews()">삭 제</a>
+					<a href="javascript:update()">답변수정</a>
+					<a href="javascript:answerDelete()">답변삭제</a>
 					<%
 						}
 					%>

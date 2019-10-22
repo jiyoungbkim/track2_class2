@@ -9,6 +9,29 @@ public class Member_DTO {
 	public Member_DTO() {
 		super();
 	}
+	public Member_DTO(String id, String pw, String name, String birth, String area, String address, String telecom,
+			String phone_1, String phone_2, String phone_3, String email_1, String email_2, String att_desk,
+			String att_note, String att_print, String att_beam, String update_date) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.birth = birth;
+		this.area = area;
+		this.address = address;
+		this.telecom = telecom;
+		this.phone_1 = phone_1;
+		this.phone_2 = phone_2;
+		this.phone_3 = phone_3;
+		this.email_1 = email_1;
+		this.email_2 = email_2;
+		this.att_desk = att_desk;
+		this.att_note = att_note;
+		this.att_print = att_print;
+		this.att_beam = att_beam;
+		this.update_date = update_date;
+		
+	}
 
 	public Member_DTO(String id, String pw, String name, String birth, String area, String address, String telecom,
 			String phone_1, String phone_2, String phone_3, String email_1, String email_2, String att_desk,

@@ -1,33 +1,20 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
-<%@ include file="/common_head.jsp" %>
-<%@ page import="java.util.*,dao.News_DAO,dto.News_DTO"%>
-<%@ include file="/common/sessionCheckManager.jsp" %>
+<%@ include file="/common_head.jsp"%>
+<%@ page import="java.util.*,dao.QandA_DAO,dto.QandA_DTO"%>
+<%@ include file="/common/sessionCheckMember.jsp" %>
 <%	
 	request.setCharacterEncoding("UTF-8");	
-	String news_no = request.getParameter("t_newsNo");
-	News_DAO dao = new News_DAO();
-	News_DTO dtoW = dao.getNewsView(news_no);
+	String qanda_no = request.getParameter("t_qandaNo");
+	QandA_DAO dao = new QandA_DAO();
+	QandA_DTO dtoN = dao.getQandaView(qanda_no);
 %>
 <div id="con">
-<style>
-#menu_bar ul li i{
-	color : #666;
-	vertical-align: middle;
-	size : 5px;
-	line-height : 40px;
-}
-#menu_bar ul li{
-	border-bottom : #999 1px;
-}
-</style>
-
 	<div id="menu_bar">
 		<ul>
 			<li><i class="fas fa-bell fa-lg"></i><a href="/notice/notice_r.jsp">&nbsp; NOTICE</a></li>
 			<li><i class="fas fa-bullhorn fa-lg"></i><a href="/news/news_r.jsp">&nbsp; NEWS</a></li>
 			<li><i class="fas fa-file-alt fa-lg"></i><a href="/freeboard/freeboard_r.jsp">&nbsp; FREEBOARD</a></li>
 			<li><i class="fab fa-quora fa-lg"></i><a href="/qanda/qanda_r.jsp">&nbsp; QNA</a></li>
-		</ul>
 	</div>
 <style>
 .board_list { padding-top:10px; }
@@ -87,14 +74,8 @@ td.title{
 </style>
 <script>
 	function update() {
-		var fm = document.notice;
-		<!--document.notice.action = "notice_proc.jsp";-->
-		//fm.action = "notice_update.jsp";
-		if(fm.t_reg_id.value == ""){
-			alert("작성자 입력!");
-			fm.t_reg_id.focus();
-			return;
-		}
+		var fm = document.qanda;
+		
 		if(fm.t_title.value == ""){
 			alert("제목 입력!");
 			fm.t_title.focus();
@@ -105,7 +86,7 @@ td.title{
 			fm.t_content.focus();
 			return;
 		}
-		fm.action = "news_proc.jsp";
+		fm.action = "qanda_proc.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -113,31 +94,34 @@ td.title{
 	<div id="contents">
 		<p>
 			<img src="/images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | NEWS
+			 HOME | COMMUNITY | QANDA
 		</p>
-		<form name="notice">
+		<form name="qanda">
 		<input type="hidden" name="t_work_gubun" value="update">
-		<input name="t_news_no" type="hidden" value="<%=news_no%>">
+		<input name="t_qanda_no" type="hidden" value="<%=qanda_no%>">
 		<div class="board_list">
 			<table class="board_table">
 				<colgroup>
-					<col width="10%" />
-					<col width="*" />
+					<col width="*%" />
+					<col width="20" />
+					<col width="40" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th>작성자</th>
-						<td><input name="t_reg_id" value="<%=dtoW.getReg_id()%>" type="text" size="90%"></td>
+						<td><%=dtoN.getUser_id()%></td>
+						<td>공개여부 <input type = "radio" value="y" name = "t_secret"<%if(dtoN.getSecret().equals("y"))out.print("checked");%>/> private
+									<input type = "radio" value="n" name = "t_secret"<%if(dtoN.getSecret().equals("n"))out.print("checked");%>/> public</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td><input name="t_title" value="<%=dtoW.getTitle()%>" type="text" size="90%"></td> <!---->
+						<td colspan="2"><input name="t_title" value="<%=dtoN.getTitle()%>" type="text" size="90%"></td> <!---->
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="t_content" class="textarea"><%=dtoW.getContent()%></textarea></td> <!---->
+						<td colspan="2"><textarea name="t_content" class="textarea"><%=dtoN.getQuestion()%></textarea></td> <!---->
 					</tr>
 				</tbody>
 			</table>			
@@ -145,7 +129,7 @@ td.title{
 		<br>
 		<div class="buttons">
 				<p>
-					<a href="news_r.jsp">취 소</a>
+					<a href="qanda_r.jsp">취 소</a>
 					<a href="javascript:update()">저 장</a> <!---->
 				</p>
 		</div>

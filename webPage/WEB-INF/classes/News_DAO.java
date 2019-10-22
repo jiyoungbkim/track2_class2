@@ -87,9 +87,11 @@ public class News_DAO {
 	}
 	public ArrayList<News_DTO> getNewsList(String selValue, String txtValue) {
     ArrayList<News_DTO> arrW = new ArrayList<News_DTO>();
-    String query = " select news_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
-				" from a20_track2_web_news  where " + selValue + " like '%" + txtValue + "%' "+
-				" order by news_no desc ";
+    String query = " select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.hit "+
+				" from a20_track2_web_news w, a20_track2_web_member m "+
+				" where w.reg_id = m.id "+
+				" and "+selValue+" like '%"+txtValue+"%' "+
+				" order by w.news_no desc ";
     
     try {
       con = common.getConnection();
@@ -122,9 +124,10 @@ public class News_DAO {
     return arrW;
   }
   public News_DTO getNewsView(String newsNo) {
-    String query =" select news_no, title, content, reg_id, to_char(reg_date, 'yyyy-mm-dd'), hit "+
-				" from a20_track2_web_news "+
-				" where news_no = '" + newsNo + "' ";
+    String query =" select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.hit "+
+				" from a20_track2_web_news w, a20_track2_web_member m "+
+				" where w.reg_id = m.id "+
+				" and w.news_no = '" + newsNo + "' ";
 
     
     News_DTO news_DTO = null;
