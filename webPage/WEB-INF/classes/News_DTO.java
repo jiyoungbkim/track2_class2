@@ -1,20 +1,22 @@
 package dto;
 
 public class News_DTO {
-	String news_no, title, content, reg_id, reg_date;
+	String news_no, title, content, reg_id, reg_date, file_name_1;
 	int hit;
 		
 	public News_DTO() {
 		super();
 	}
-	public News_DTO(String news_no, String title, String content, String reg_id, String reg_date, int hit) {
+	public News_DTO(String news_no, String title, String content, String reg_id, String reg_date, String file_name_1, int hit) {
 		super();
 		this.news_no = news_no;
 		this.title = title;
 		this.content = content;
 		this.reg_id = reg_id;
 		this.reg_date = reg_date;
+		this.file_name_1 = file_name_1;
 		this.hit = hit;
+
 	}
 	public String getNews_no() {
 		return news_no;
@@ -45,6 +47,12 @@ public class News_DTO {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	public String getFile_name_1() {
+		return file_name_1;
+	}
+	public void setFile_name_1(String file_name_1) {
+		this.file_name_1 = file_name_1;
 	}
 	public int getHit() {
 		return hit;

@@ -208,7 +208,9 @@ td.title{
 								}
 							}
 						%>
-						<%=arrQ.get(k).getSecret()%>&nbsp;&nbsp;<%=arrQ.get(k).getTitle()%>
+						<%=arrQ.get(k).getTitle()%>
+						<%if(arrQ.get(k).getSecret().equals("[비공개]")) { %><i class="fas fa-lock"></i><% } %> 
+						
 						</a></td>
 						<td><%=arrQ.get(k).getName()%></td>
 						<td><%=arrQ.get(k).getReg_date_q()%></td>

@@ -105,7 +105,7 @@ td.title{
 			fm.t_content.focus();
 			return;
 		}
-		fm.action = "news_proc.jsp";
+		fm.action = "news_update.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -115,7 +115,7 @@ td.title{
 			<img src="/images/home3.png" class="home_icon">
 			 HOME | COMMUNITY | NEWS
 		</p>
-		<form name="notice">
+		<form name="notice" enctype="multipart/form-data">
 		<input type="hidden" name="t_work_gubun" value="update">
 		<input name="t_news_no" type="hidden" value="<%=news_no%>">
 		<div class="board_list">
@@ -138,6 +138,20 @@ td.title{
 					<tr>
 						<th>내용</th>
 						<td><textarea name="t_content" class="textarea"><%=dtoW.getContent()%></textarea></td> <!---->
+					</tr>
+					<tr>
+						<th>첨부</th>
+						<td colspan="2">
+					<% if(dtoW.getFile_name_1() != null) { %>
+					
+						<a href="/common/filedown.jsp?t_file=<%=dtoW.getFile_name_1()%>&t_gubun=news"><%=dtoW.getFile_name_1()%>
+						&nbsp;&nbsp;파일 삭제
+						<input type="checkbox" name="checkbox_del_fileName" value="<%=dtoW.getFile_name_1()%>">
+						<br>
+					<% } %>
+						<input type="file" name="fileName_a">
+						<input type="text" name="ori_fileName_a" value="<%=dtoW.getFile_name_1()%>">
+						</td>
 					</tr>
 				</tbody>
 			</table>			

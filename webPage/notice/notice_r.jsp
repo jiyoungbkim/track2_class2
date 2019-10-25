@@ -158,6 +158,7 @@ td.title{
 					<col width="10%">
 					<col width="*">
 					<col width="10%">
+					<col width="10%">
 					<col width="20%">
 					<col width="10%">
 				</colgroup>
@@ -165,6 +166,7 @@ td.title{
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
+						<th>첨부파일</th>
 						<th>글쓴이</th>
 						<th>작성일</th>
 						<th>조회수</th>
@@ -183,6 +185,11 @@ td.title{
 						<a href="notice_v.jsp?t_noticeNo=<%=arrN.get(k).getNotice_no()%>">
 						<%=arrN.get(k).getTitle()%>
 						</a></td>
+						<% if (arrN.get(k).getFile_name_1() != null) { %> 
+						<td><i class="fas fa-paperclip"></i></a></td>
+						<% } else { %>
+						<td>-</td>	
+						<% } %>
 						<td><%=arrN.get(k).getReg_id()%></td>
 						<td><%=arrN.get(k).getReg_date()%></td>
 						<td><%=arrN.get(k).getHit()%></td>

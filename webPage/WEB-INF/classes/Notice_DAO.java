@@ -156,7 +156,7 @@ public class Notice_DAO {
 	//게시물 조회
 	public Notice_DTO getNoticeView(String noticeNo){
 
-		String query =" select n.notice_no, n.title, n.content, m.name, to_char(n.reg_date, 'yyyy-mm-dd'), n.hit "+
+		String query =" select n.notice_no, n.title, n.content, n.file_name_1, m.name, to_char(n.reg_date, 'yyyy-mm-dd'), n.hit "+
 						" from a20_track2_web_notice n, a20_track2_web_member m "+
 						" where n.reg_id = m.id "+
 						" and n.notice_no = '"+noticeNo+"'";		
@@ -170,11 +170,12 @@ public class Notice_DAO {
 				String notice_no = rs.getString(1);
 				String title = rs.getString(2);
 				String content = rs.getString(3);
-				String reg_id = rs.getString(4);
-				String reg_date = rs.getString(5);
-				int hit = rs.getInt(6);
+				String file_name_1 = rs.getString(4);
+				String reg_id = rs.getString(5);
+				String reg_date = rs.getString(6);
+				int hit = rs.getInt(7);
 				
-				dtoN = new Notice_DTO(notice_no,title,content,reg_id,reg_date,hit);
+				dtoN = new Notice_DTO(notice_no,title,content,file_name_1,reg_id,reg_date,hit);
 			}
 		} catch(RemoteException me) {
 			System.out.println(" RemoteException getNoticeView(): "+me.getMessage());
@@ -219,12 +220,12 @@ public class Notice_DAO {
 		return result;			
 	}
 	// 글 수정 저장
-	public int updateNotice(String notice_no,String title,String content,String reg_id,String reg_date) {
+	public int updateNotice(String notice_no,String title,String content,String reg_id,String reg_date,String file_name_1) {
 		
 		
 		String query = " update a20_track2_web_notice "+
 						" set title = '"+title+"', content = '"+content+"', "+
-						" reg_id = '"+reg_id+"', reg_date = '"+reg_date+"' "+
+						" reg_id = '"+reg_id+"', reg_date = '"+reg_date+"', file_name_1 = '"+file_name_1+"' "+
 						" where notice_no = '"+notice_no+"' ";
 		int result = 0;
 		try {
@@ -252,7 +253,7 @@ public class Notice_DAO {
 		
 		String query = " update a20_track2_web_notice "+
 						" set title = '"+dto.getTitle()+"', content = '"+dto.getContent()+"', "+
-						" reg_id = '"+dto.getReg_id()+"', reg_date = '"+dto.getReg_date()+"' "+
+						" reg_id = '"+dto.getReg_id()+"', reg_date = '"+dto.getReg_date()+"', file_name_1 = '"+dto.getFile_name_1()+"' "+
 						" where notice_no = '"+dto.getNotice_no()+"' ";
 		int result = 0;
 		try {

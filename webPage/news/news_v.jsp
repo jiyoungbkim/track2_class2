@@ -126,6 +126,12 @@ td.title{
 						<th>내용</th>
 						<td colspan="2"><textarea class="textarea" readonly><%=dtoW.getContent()%></textarea></td>
 					</tr>
+					<% if(dtoW.getFile_name_1() != null) { %>
+					<tr>
+						<th>첨부</th>
+						<td colspan="2"><a href="/common/filedown.jsp?t_file=<%=dtoW.getFile_name_1()%>&t_gubun=news"><%=dtoW.getFile_name_1()%></td>
+					</tr>
+					<% } %>
 					<tr>
 						<th>작성자</th>
 						<td class="cover"><%=dtoW.getReg_id()%></td>

@@ -23,7 +23,7 @@ public class Notice_DTO {
 		this.notice_no 		= notice_no;
 		this.title 			= title;
 		this.content 		= content;
-		this.file_name_1 	= file_name_1;
+		this.file_name_1    = file_name_1;	
 		this.reg_id 		= reg_id;
 		this.reg_date 		= reg_date;
 		this.hit 			= hit;

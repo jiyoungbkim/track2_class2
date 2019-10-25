@@ -139,6 +139,7 @@ td.title{
 					<col width="10%">
 					<col width="*">
 					<col width="10%">
+					<col width="10%">
 					<col width="20%">
 					<col width="10%">
 				</colgroup>
@@ -146,6 +147,7 @@ td.title{
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
+						<th>첨부</th>
 						<th>글쓴이</th>
 						<th>작성일</th>
 						<th>조회수</th>
@@ -164,6 +166,11 @@ td.title{
 						<a href="news_v.jsp?t_newsNo=<%=arrW.get(k).getNews_no()%>">
 						<%=arrW.get(k).getTitle()%>
 						</a></td>
+						<% if (arrW.get(k).getFile_name_1() != null) { %> 
+						<td><i class="far fa-save"></i></a></td>
+						<% } else { %>
+						<td>-</td>	
+						<% } %>
 						<td><%=arrW.get(k).getReg_id()%></td>
 						<td><%=arrW.get(k).getReg_date()%></td>
 						<td><%=arrW.get(k).getHit()%></td>
@@ -171,7 +178,7 @@ td.title{
 				<%
 							v_count = v_count + 1;
 							for_count = for_count + 1;
-						}else { 
+						} else { 
 							v_count = v_count + 1;
 						}
 

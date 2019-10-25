@@ -102,6 +102,7 @@ td.title{
 					<col width="10%">
 					<col width="*">
 					<col width="20%">
+					
 				</colgroup>
 				<thead>				
 					<tr>
@@ -115,6 +116,12 @@ td.title{
 						<th>내용</th>
 						<td colspan="2"><textarea class="textarea" readonly><%=dtoN.getContent()%></textarea></td>
 					</tr>
+					<% if(dtoN.getFile_name_1() != null) { %>
+					<tr>
+						<th>첨부</th>
+						<td colspan="2"><a href="/common/filedown.jsp?t_file=<%=dtoN.getFile_name_1()%>&t_gubun=notice"><%=dtoN.getFile_name_1()%></td>
+					</tr>
+					<% } %>
 					<tr>
 						<th>작성자</th>
 						<td class="cover"><%=dtoN.getReg_id()%></td>

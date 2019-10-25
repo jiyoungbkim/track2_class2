@@ -92,7 +92,39 @@ td.title{
 			fm.t_content.focus();
 			return;
 		}
-		fm.action = "notice_proc.jsp";
+		//첨부파일 용량 체크
+		var file = fm.fileName_a;
+		if(file.value != "") {
+		
+			// 사이즈체크
+			var maxSize  = 1 * 1024 * 1024    //2MB
+			var fileSize = 0;
+
+			// 브라우저 확인
+			var browser=navigator.appName;
+			
+			// 익스플로러일 경우
+			if (browser=="Microsoft Internet Explorer")
+			{
+				var oas = new ActiveXObject("Scripting.FileSystemObject");
+				fileSize = oas.getFile(file.value).size;
+			}
+			// 익스플로러가 아닐경우
+			else
+			{
+				fileSize = file.files[0].size;
+			}
+
+
+			alert("파일사이즈 : "+ fileSize);
+
+			if(fileSize > maxSize)
+			{
+				alert("첨부파일 사이즈는 2MB 이내로 등록 가능합니다.    ");
+				return;
+			}
+		}
+		fm.action = "notice_update.jsp";
 		fm.method = "post";
 		fm.submit();
 	}
@@ -102,7 +134,7 @@ td.title{
 			<img src="/images/home3.png" class="home_icon">
 			 HOME | COMMUNITY | NOTICE
 		</p>
-		<form name="notice">
+		<form name="notice" enctype="multipart/form-data">
 		<input type="hidden" name="t_work_gubun" value="update">
 		<input name="t_notice_no" type="hidden" value="<%=notice_no%>">
 		<div class="board_list">
@@ -114,7 +146,7 @@ td.title{
 				<thead>
 					<tr>
 						<th>작성자</th>
-						<td><input name="t_reg_id" value="<%=dtoN.getReg_id()%>" type="text" size="90%"></td>
+						<td><input name="t_reg_id" type="hidden" value="<%=dtoN.getReg_id()%>" type="text" size="90%"><%=dtoN.getReg_id()%></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -125,6 +157,20 @@ td.title{
 					<tr>
 						<th>내용</th>
 						<td><textarea name="t_content" class="textarea"><%=dtoN.getContent()%></textarea></td> <!---->
+					</tr>
+					<tr>
+						<th>첨부</th>
+						<td colspan="2">
+					<% if(dtoN.getFile_name_1() != null) { %>
+					
+						<a href="/common/filedown.jsp?t_file=<%=dtoN.getFile_name_1()%>&t_gubun=notice"><%=dtoN.getFile_name_1()%>
+						&nbsp;&nbsp;파일 삭제
+						<input type="checkbox" name="checkbox_del_fileName" value="<%=dtoN.getFile_name_1()%>">
+						<br>
+					<% } %>
+						<input type="file" name="fileName_a">
+						<input type="text" name="ori_fileName_a" value="<%=dtoN.getFile_name_1()%>">
+						</td>
 					</tr>
 				</tbody>
 			</table>			

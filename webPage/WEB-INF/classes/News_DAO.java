@@ -62,9 +62,9 @@ public class News_DAO {
 		}
 		return newsNo;
 	}
-	public int insertNews(String news_no, String title, String content, String reg_id, String reg_date) {
-		String query = " insert into a20_track2_web_news(news_no, title, content, reg_id, reg_date) "+
-						" values ('"+news_no+"','"+title+"','"+content+"','"+reg_id+"','"+reg_date+"')";
+	public int insertNews(String news_no, String title, String content, String reg_id, String reg_date, String file_name_1) {
+		String query = " insert into a20_track2_web_news(news_no, title, content, reg_id, reg_date, file_name_1) "+
+						" values ('"+news_no+"','"+title+"','"+content+"','"+reg_id+"','"+reg_date+"','"+file_name_1+"')";
 		int result = 0;
 		try {
 			con = common.getConnection();
@@ -87,7 +87,7 @@ public class News_DAO {
 	}
 	public ArrayList<News_DTO> getNewsList(String selValue, String txtValue) {
     ArrayList<News_DTO> arrW = new ArrayList<News_DTO>();
-    String query = " select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.hit "+
+    String query = " select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.file_name_1, w.hit "+
 				" from a20_track2_web_news w, a20_track2_web_member m "+
 				" where w.reg_id = m.id "+
 				" and "+selValue+" like '%"+txtValue+"%' "+
@@ -103,9 +103,10 @@ public class News_DAO {
         String content = rs.getString(3);
         String reg_id = rs.getString(4);
         String reg_date = rs.getString(5);
-        int hit = rs.getInt(6);
+        String file_name_1 = rs.getString(6);
+        int hit = rs.getInt(7);
         
-        News_DTO news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, hit);
+        News_DTO news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, file_name_1, hit);
         arrW.add(news_DTO);
       } 
     } catch (RemoteException remoteException) {
@@ -124,7 +125,7 @@ public class News_DAO {
     return arrW;
   }
   public News_DTO getNewsView(String newsNo) {
-    String query =" select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.hit "+
+    String query =" select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.file_name_1, w.hit "+
 				" from a20_track2_web_news w, a20_track2_web_member m "+
 				" where w.reg_id = m.id "+
 				" and w.news_no = '" + newsNo + "' ";
@@ -141,9 +142,10 @@ public class News_DAO {
         String content = rs.getString(3);
         String reg_id = rs.getString(4);
         String reg_date = rs.getString(5);
-        int hit = rs.getInt(6);
+		String file_name_1 = rs.getString(6);
+        int hit = rs.getInt(7);
         
-        news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, hit);
+        news_DTO = new News_DTO(news_no, title, content, reg_id, reg_date, file_name_1, hit);
       } 
     } catch (RemoteException remoteException) {
       System.out.println(" RemoteException getNewsView(): " + remoteException.getMessage());
@@ -186,10 +188,10 @@ public class News_DAO {
     } 
     return i;
   }
-  public int updateNews(String news_no,String title,String content,String reg_id,String reg_date) {
+  public int updateNews(String news_no,String title,String content,String reg_id,String reg_date,String file_name_1) {
     String str = " update a20_track2_web_news "+
 				" set title = '" + title + "', content = '" + content + "', "+
-				" reg_id = '" + reg_id + "', reg_date = '" + reg_date + "' "+
+				" reg_id = '" + reg_id + "', reg_date = '" + reg_date + "', file_name_1 = '"+file_name_1+"' "+
 				" where news_no = '" + news_no + "' ";
     
     int i = 0;
