@@ -95,11 +95,24 @@ td.title{
 			fm.t_content.focus();
 			return;
 		}
-		
+		// var fName = "c:\abc\aaa.txt";
+		// var position = fName.lastIndexOf("\\");
+		// alert("position :"+position);
 		//첨부파일 용량 체크
 		var file = fm.fileName_a;
 		if(file.value != "") {
-		
+			alert(file.value);
+			var position = file.value.lastIndexOf("\\");
+			alert("position :"+position);
+			
+			//var len = file.value.length;
+			var fName = file.value.substr(position+1);
+			var len = fName.length;
+			alert("len : "+len);
+			if(len > 20) {
+				alert("첨부파일명 길이 20자리 이내로"+len);
+				return;
+			}
 			// 사이즈체크
 			var maxSize  = 1 * 1024 * 1024    //2MB
 			var fileSize = 0;
@@ -132,7 +145,7 @@ td.title{
 		//fm.action = "notice_proc.jsp";
 		fm.action = "notice_insert.jsp";
 		fm.method = "post";
-		fm.submit();
+		//fm.submit();
 		
 	}
 </script> <!---->

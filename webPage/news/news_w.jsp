@@ -98,6 +98,15 @@ td.title{
 		//첨부파일 용량 체크
 		var file = fm.fileName_a;
 		if(file.value != "") {
+			//첨부 파일명 길이 체크
+			var position = file.value.lastIndexOf("\\");
+			var fName = file.value.substr(position+1);
+			var len = fName.length;
+			alert("len : "+len);
+			if(len > 20) {
+				alert("첨부파일명 길이 20자리 이내로"+len);
+				return;
+			}
 			// 사이즈체크
 			var maxSize  = 1 * 1024 * 1024    //2MB
 			var fileSize = 0;

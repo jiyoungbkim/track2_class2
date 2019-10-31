@@ -51,6 +51,14 @@
 			$("#s_div_5").stop().slideUp("slow");
 		  });
 		});
+		$(function(){
+		  $(".menu6").mouseover(function(){
+			$("#s_div_6").stop().slideDown("fast");
+		  });
+		  $(".menu6").mouseleave(function(){
+			$("#s_div_6").stop().slideUp("fast");
+		  });
+		});
 	//]]>
 </script>
 <style>
@@ -124,7 +132,11 @@ body {
 .header_menu li a{
 	display : inline-block;
 	//padding-top : 5px;
+	<% if (sessionLevel.equals("manager")) { %>
+	width : 156.66px;
+	<% } else { %>
 	width : 188px;
+	<% } %>
 	height : 20px;
 	//background : linear-gradient( to right, #5B247A, #1BCEDF);
 	color  : white;	
@@ -146,6 +158,10 @@ body {
 	display : none;
 }
 #s_div_5 {
+	position : absolute;
+	right : 0;	
+}
+#s_div_6 {
 	position : absolute;
 	right : 0;
 }
@@ -170,7 +186,11 @@ body {
 	width : 100px;
 	background : #5B247A;	
 }
+#s_div_6 ul li a{
 
+	width : 100px;
+	background : #5B247A;	
+}
 .p2{
 	color : #fff;
 	text-align : justify;
@@ -272,6 +292,16 @@ body {
 					</ul>
 				</div>
 			</li>
+			<% if (sessionLevel.equals("manager")) { %>
+			<li class="menu6"><a href="/mana/Mmember_r.jsp">관리자메뉴</a>
+				<div id="s_div_6">
+					<ul>
+						<li><a href="/mana/Mmember_r.jsp">MEMBER LIST</a></li>
+						<li><a href="/mana/Mmember_r.jsp">STAFF LIST</a></li>
+					</ul>
+				</div>
+			</li>
+			<% } %>
 		</ul>
 	</div>	
 <!-- 	

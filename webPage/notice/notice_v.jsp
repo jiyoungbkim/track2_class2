@@ -79,16 +79,17 @@ td.title{
 		var yn = confirm("정말 삭제 하겠습니까? ");
 		if(yn) {
 			var fm = document.notice;
-			//fm.action = "notice_delete.jsp";
-			fm.action = "notice_proc.jsp";
+			fm.action = "notice_delete.jsp";
+			//fm.action = "notice_proc.jsp";
 			fm.method = "post";
 			fm.submit();
 		}
 	}
 </script>
-	<form name="notice">
+	<form name="notice" >
 		<input type="hidden" name="t_work_gubun" value="delete">
 		<input type="hidden" name="t_notice_no" value="<%=notice_no%>">
+		<input type="hidden" name="t_fileName" value="<%=dtoN.getFile_name_1()%>">
 	</form>
 	<div id="contents">
 		<p>

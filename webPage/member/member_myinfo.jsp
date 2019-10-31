@@ -200,10 +200,10 @@ select {
 						<td>
 							<select name="t_area">
 							 <option value="선택안함"> 지역선택 </option>
-							 <option value="서울" <%if(dto.getArea().equals("서울"))out.print("selected");%>> 서울 </option>
-							 <option value="수원" <%if(dto.getArea().equals("수원"))out.print("selected");%>> 수원 </option>
-							 <option value="대전" <%if(dto.getArea().equals("대전"))out.print("selected");%>> 대전 </option>
-							 <option value="광주" <%if(dto.getArea().equals("광주"))out.print("selected");%>> 광주 </option>
+							 <option value="서울" > 서울 </option>
+							 <option value="수원" > 수원 </option>
+							 <option value="대전" > 대전 </option>
+							 <option value="광주" > 광주 </option>
 							</select>
 							<input name="t_address" value="<%=dto.getAddress()%>" type="text" size="40%" placeholder="나머지 주소" maxlength="25">
 						</td> <!---->

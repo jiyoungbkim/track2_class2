@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CommonUtil{
+	// 첨부파일 저장 경로
+	public static String file_dir_notice= "C:/webserver/webapps/ROOT/file_room/notice/";
+	public static String file_dir_news= "C:/webserver/webapps/ROOT/file_room/news/";
 	// 오늘날짜
 	public static String getToday(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

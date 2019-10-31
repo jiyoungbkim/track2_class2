@@ -8,7 +8,7 @@
 	String notice_no 	= dao.getNoticeNo();
 	
 	int sizeLimit = 1024 * 1024 * 1;
-	String file_dir = "C:/webserver/webapps/ROOT/file_room/notice/";
+	String file_dir = CommonUtil.file_dir_notice;
 	
 	MultipartRequest mpr = new MultipartRequest(request,file_dir,sizeLimit,"UTF-8");
 	

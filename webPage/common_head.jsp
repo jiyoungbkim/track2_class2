@@ -14,42 +14,50 @@
 	//<![CDATA[
 		$(function(){
 		  $(".menu1").mouseover(function(){
-			$("#s_div_1").stop().slideDown("slow");
+			$("#s_div_1").stop().slideDown("fast");
 		  });
 		  $(".menu1").mouseleave(function(){
-			$("#s_div_1").stop().slideUp("slow");
+			$("#s_div_1").stop().slideUp("fast");
 		  });
 		}); 
 		$(function(){
 		  $(".menu2").mouseover(function(){
-			$("#s_div_2").stop().slideDown("slow");
+			$("#s_div_2").stop().slideDown("fast");
 		  });
 		  $(".menu2").mouseleave(function(){
-			$("#s_div_2").stop().slideUp("slow");
+			$("#s_div_2").stop().slideUp("fast");
 		  });
 		});
 		$(function(){
 		  $(".menu3").mouseover(function(){
-			$("#s_div_3").stop().slideDown("slow");
+			$("#s_div_3").stop().slideDown("fast");
 		  });
 		  $(".menu3").mouseleave(function(){
-			$("#s_div_3").stop().slideUp("slow");
+			$("#s_div_3").stop().slideUp("fast");
 		  });
 		});
 		$(function(){
 		  $(".menu4").mouseover(function(){
-			$("#s_div_4").stop().slideDown("slow");
+			$("#s_div_4").stop().slideDown("fast");
 		  });
 		  $(".menu4").mouseleave(function(){
-			$("#s_div_4").stop().slideUp("slow");
+			$("#s_div_4").stop().slideUp("fast");
 		  });
 		});
 		$(function(){
 		  $(".menu5").mouseover(function(){
-			$("#s_div_5").stop().slideDown("slow");
+			$("#s_div_5").stop().slideDown("fast");
 		  });
 		  $(".menu5").mouseleave(function(){
-			$("#s_div_5").stop().slideUp("slow");
+			$("#s_div_5").stop().slideUp("fast");
+		  });
+		});
+		$(function(){
+		  $(".menu6").mouseover(function(){
+			$("#s_div_6").stop().slideDown("fast");
+		  });
+		  $(".menu6").mouseleave(function(){
+			$("#s_div_6").stop().slideUp("fast");
 		  });
 		});
 	//]]>
@@ -123,7 +131,11 @@ body {
 .header_menu li a{
 	display : inline-block;
 	//padding-top : 5px;
+	<% if (sessionLevel.equals("manager")) { %>
+	width : 156.66px;
+	<% } else { %>
 	width : 188px;
+	<% } %>
 	height : 20px;
 	//background : linear-gradient( to right, #5B247A, #1BCEDF);
 	color  : white;	
@@ -148,6 +160,10 @@ body {
 	position : absolute;
 	right : 0;
 }
+#s_div_6 {
+	position : absolute;
+	right : 0;
+}
 #s_div_1 ul li a{
 	width : 100px;
 	background : #5B247A;	
@@ -165,6 +181,11 @@ body {
 	background : #5B247A;	
 }
 #s_div_5 ul li a{
+
+	width : 100px;
+	background : #5B247A;	
+}
+#s_div_6 ul li a{
 
 	width : 100px;
 	background : #5B247A;	
@@ -255,6 +276,16 @@ body {
 					</ul>
 				</div>
 			</li>
+			<% if (sessionLevel.equals("manager")) { %>
+			<li class="menu6"><a href="/mana/Mmember_r.jsp">관리자메뉴</a>
+				<div id="s_div_6">
+					<ul>
+						<li><a href="/mana/Mmember_r.jsp">MEMBER LIST</a></li>
+						<li><a href="/mana/Mmember_r.jsp">STAFF LIST</a></li>
+					</ul>
+				</div>
+			</li>
+			<% } %>
 		</ul>
 	</div>
 </div>

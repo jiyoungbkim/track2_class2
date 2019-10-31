@@ -7,7 +7,7 @@
 	Notice_DAO dao = new Notice_DAO();
 	
 	int sizeLimit = 1024 * 1024 * 1;
-	String file_dir = "C:/webserver/webapps/ROOT/file_room/notice/";
+	String file_dir = CommonUtil.file_dir_notice;;
 	
 	MultipartRequest mpr = new MultipartRequest(request,file_dir,sizeLimit,"UTF-8");
 
@@ -55,7 +55,7 @@
 			<% } else {%>
 				alert("정상처리되지 못했습니다.");
 			<% }%>
-			//location.href = "notice_r.jsp";
+			location.href = "notice_r.jsp";
 		</script>
 	</head>
 </html>

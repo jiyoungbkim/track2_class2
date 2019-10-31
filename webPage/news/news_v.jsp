@@ -90,8 +90,8 @@ td.title{
 		var yn = confirm("정말 삭제 하겠습니까? ");
 		if(yn) {
 			var fm = document.notice;
-			//fm.action = "notice_delete.jsp";
-			fm.action = "news_proc.jsp";
+			fm.action = "news_delete.jsp";
+			//fm.action = "news_proc.jsp";
 			fm.method = "post";
 			fm.submit();
 		}
@@ -100,6 +100,7 @@ td.title{
 	<form name="notice">
 		<input type="hidden" name="t_work_gubun" value="delete">
 		<input type="hidden" name="t_news_no" value="<%=news_no%>">
+		<input type="hidden" name="t_fileName" value="<%=dtoW.getFile_name_1()%>">
 	</form>
 	<div id="contents">
 		<p>
