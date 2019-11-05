@@ -13,6 +13,14 @@ public class Freeboard_DTO {
 	public Freeboard_DTO() {
 		super();
 	}
+	public Freeboard_DTO(String freeboard_no, String title, String content, String reg_date) {
+		super();
+		this.freeboard_no 	= freeboard_no;
+		this.title 			= title;
+		this.content 		= content;
+		this.reg_date 		= reg_date;
+	}
+	
 	public Freeboard_DTO(String freeboard_no, String title, String reg_id, String reg_date, int hit) {
 		super();
 		this.freeboard_no = freeboard_no;

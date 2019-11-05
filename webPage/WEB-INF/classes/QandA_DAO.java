@@ -362,7 +362,44 @@ public class QandA_DAO {
 		}				
 		
 		return dtoQ;
-	}	
+	}
+	// 인덱스 조회
+	public ArrayList<QandA_DTO> getQandaIndex(){
+		ArrayList<QandA_DTO> arrQ = new ArrayList<QandA_DTO>();
+		String query = " select qanda_no, substr(title, 1,6), substr(question, 1,15), to_char(reg_date_q, 'yyyy-mm-dd') "+
+						" from (select qanda_no, title, question, reg_date_q "+
+						" from track2_1조_web_qanda "+
+						" order by reg_date_q desc) "+
+						" where rownum <= 5 ";
+		try{
+			con = common.getConnection();
+			ps  = con.prepareStatement(query);
+			rs  = ps.executeQuery();
+			while(rs.next()){
+				String qanda_no = rs.getString(1);
+				String title = rs.getString(2);
+				String question = rs.getString(3);
+				String reg_date_q = rs.getString(4);
+				
+				QandA_DTO dto = new QandA_DTO(qanda_no,title,question,reg_date_q);
+				arrQ.add(dto);
+			}
+		} catch(RemoteException me) {
+			System.out.println(" RemoteException getQandaIndex(): "+me.getMessage());
+		} catch(SQLException se) {
+			System.out.println(" SQLException getQandaIndex(): "+se.getMessage());
+		} catch(Exception e) {
+			System.out.println(" 오류 : D_2_DAO.getQandaIndex() ");
+		} finally {
+			try{
+				common.close(con, ps, rs);
+			} catch(Exception e) {
+				System.out.println(" getQandaIndex close Exception "+e.getMessage());
+			}
+		}				
+		
+		return arrQ;
+	}
 	//조회수 증가
 	public int qandaHit(String qandaNo) {
 		int result = 0;

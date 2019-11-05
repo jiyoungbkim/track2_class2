@@ -13,6 +13,14 @@ public class QandA_DTO {
 	name;
 	int  hit;
 	
+	public QandA_DTO(String qanda_no, String title, String question, String reg_date_q) {
+		super();
+		this.qanda_no = qanda_no;
+		this.title = title;
+		this.question = question;
+		this.reg_date_q = reg_date_q;
+	}
+	
 	public QandA_DTO(String qanda_no, String title, String question, String user_id, String reg_date_q,
 			String secret) {
 		super();

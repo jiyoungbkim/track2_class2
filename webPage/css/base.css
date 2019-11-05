@@ -1,7 +1,7 @@
 @charset "utf-8";
 
-a { text-decoration:none; color:#999; }
-a:hover { color:#666; }
+a { text-decoration:none; color:#4a5365; }
+a:hover { color:#3366ff; }
 
 h1,h2,h3,h4,h5,h6 { font-size:100%; }
 address,strong{font-style:normal; font-weight:normal;}

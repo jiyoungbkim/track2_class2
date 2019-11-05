@@ -145,7 +145,7 @@ td.title{
 		//fm.action = "notice_proc.jsp";
 		fm.action = "notice_insert.jsp";
 		fm.method = "post";
-		//fm.submit();
+		fm.submit();
 		
 	}
 </script> <!---->
@@ -166,7 +166,7 @@ td.title{
 				<thead>
 					<tr>
 						<th>작성자</th>
-						<td><%=sessionName%></td>
+						<td><input name="t_reg_id" type="hidden" value="<%=sessionId%>"><%=sessionId%></td>
 					</tr>
 				</thead>
 				<tbody>

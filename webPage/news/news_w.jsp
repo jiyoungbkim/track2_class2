@@ -1,6 +1,16 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ include file="/common_head.jsp" %>
 <%@ include file="/common/sessionCheckManager.jsp" %>
+<%
+	if(!sessionLevel.equals("manager")){
+%>
+	<script>
+		alert("관리자 화면입니다");
+		location.href = "/index.jsp";
+	</script>	
+<%	
+	}
+%>
 <div id="con">
 <style>
 #menu_bar ul li i{

@@ -132,10 +132,27 @@ td.title{
 	<div id="contents">
 		<p>
 			<img src="../images/home3.png" class="home_icon">
-			 HOME | COMMUNITY | MEMBER
+			 HOME | MANAGER | MEMBER
 		</p>
 		<br>
 <script>
+	function formSearch(){
+		var fm = document.member;
+		fm.action = "Mmember_r.jsp";
+		fm.method = "post";
+		
+		
+		fm.submit();
+	}
+	function goExcel(){
+		var fm = document.member;
+		fm.action = "/common/excel_down_member.jsp";
+		fm.method = "post";
+		alert(fm.t_sel.value);
+		alert(fm.t_search.value);
+		alert(fm.t_area.value);
+		fm.submit();
+	}
 	function t_selChange(){
 		var fm = document.member;
 		if(fm.t_sel.value == "all"){
@@ -143,16 +160,6 @@ td.title{
 		} else {
 			fm.t_search.disabled="";
 		}
-	}
-	function formSearch(){
-		var fm = document.member;
-		fm.action = "Mmember_r.jsp";
-		fm.method = "post";
-		
-		// alert(fm.t_sel.value);
-		// alert(fm.t_search.value);
-		// alert(fm.t_area.value);
-		fm.submit();
 	}
 </script>
 		<form name="member">
@@ -176,6 +183,7 @@ td.title{
 					<option value="광주" > 광주 </option>
 				</select>
 				<input type="button" onClick="javascript:formSearch()" value=" 검 색 " style="width: 60px"/>
+				<input type="button" onClick="javascript:goExcel()" value=" Excel " style="width: 60px"/>
 			</div>
 		</form>	
 		<input type="hidden" class="count">전체 회원수 : <%=memberCount%> 명

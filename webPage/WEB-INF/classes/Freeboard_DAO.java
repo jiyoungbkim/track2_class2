@@ -164,6 +164,42 @@ public class Freeboard_DAO {
 		
 		return dtoF;
 	}
+	// 인덱스 조회
+	public ArrayList<Freeboard_DTO> getFreeboardIndex(){
+		ArrayList<Freeboard_DTO> arrF = new ArrayList<Freeboard_DTO>();
+		String query = " select freeboard_no, substr(title, 1,6), substr(content, 1,15), to_char(reg_date, 'yyyy-mm-dd') "+
+						" from (select freeboard_no, title, content, reg_date "+
+						" from a20_track2_web_freeboard "+
+						" order by reg_date desc) "+
+						" where rownum <= 5 ";
+		try{
+			con = common.getConnection();
+			ps  = con.prepareStatement(query);
+			rs  = ps.executeQuery();
+			while(rs.next()){
+				String freeboard_no = rs.getString(1);
+				String title = rs.getString(2);
+				String content = rs.getString(3);
+				String reg_date = rs.getString(4);
+				
+				Freeboard_DTO dto = new Freeboard_DTO(freeboard_no,title,content,reg_date);
+				arrF.add(dto);
+			}
+		} catch(RemoteException me) {
+			System.out.println(" RemoteException getFreeboardIndex(): "+me.getMessage());
+		} catch(SQLException se) {
+			System.out.println(" SQLException getFreeboardIndex(): "+se.getMessage());
+		} catch(Exception e) {
+			System.out.println(" 오류 : D_2_DAO.getFreeboardIndex() ");
+		} finally {
+			try{
+				common.close(con, ps, rs);
+			} catch(Exception e) {
+				System.out.println(" getFreeboardIndex close Exception "+e.getMessage());
+			}
+		}				
+		return arrF;
+	}
 	// 질문 등록 dto
 	public int insertFreeboard(Freeboard_DTO dto) {
 		

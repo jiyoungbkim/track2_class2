@@ -7,6 +7,14 @@ public class News_DTO {
 	public News_DTO() {
 		super();
 	}
+	public News_DTO(String news_no, String title, String content, String reg_date) {
+		super();
+		this.news_no 		= news_no;
+		this.title 			= title;
+		this.content 		= content;
+		this.reg_date 		= reg_date;
+	}
+	
 	public News_DTO(String news_no, String title, String content, String reg_id, String reg_date, String file_name_1, int hit) {
 		super();
 		this.news_no = news_no;

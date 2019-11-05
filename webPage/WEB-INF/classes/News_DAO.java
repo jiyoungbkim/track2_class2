@@ -85,6 +85,43 @@ public class News_DAO {
 		}
 		return result;
 	}
+	// 인덱스 조회
+	public ArrayList<News_DTO> getNewsIndex(){
+		ArrayList<News_DTO> arrW = new ArrayList<News_DTO>();
+		String query = " select news_no, substr(title, 1,6), substr(content, 1,15), to_char(reg_date, 'yyyy-mm-dd') "+
+						" from (select news_no, title, content, reg_date "+
+						" from a20_track2_web_news "+
+						" order by reg_date desc) "+
+						" where rownum <= 5 ";
+		try{
+			con = common.getConnection();
+			ps  = con.prepareStatement(query);
+			rs  = ps.executeQuery();
+			while(rs.next()){
+				String news_no = rs.getString(1);
+				String title = rs.getString(2);
+				String content = rs.getString(3);
+				String reg_date = rs.getString(4);
+				
+				News_DTO dto = new News_DTO(news_no,title,content,reg_date);
+				arrW.add(dto);
+			}
+		} catch(RemoteException me) {
+			System.out.println(" RemoteException getNewsIndex(): "+me.getMessage());
+		} catch(SQLException se) {
+			System.out.println(" SQLException getNewsIndex(): "+se.getMessage());
+		} catch(Exception e) {
+			System.out.println(" 오류 : D_2_DAO.getNewsIndex() ");
+		} finally {
+			try{
+				common.close(con, ps, rs);
+			} catch(Exception e) {
+				System.out.println(" getNewsIndex close Exception "+e.getMessage());
+			}
+		}				
+		
+		return arrW;
+	}
 	public ArrayList<News_DTO> getNewsList(String selValue, String txtValue) {
     ArrayList<News_DTO> arrW = new ArrayList<News_DTO>();
     String query = " select w.news_no, w.title, w.content, m.name, to_char(w.reg_date, 'yyyy-mm-dd'), w.file_name_1, w.hit "+
