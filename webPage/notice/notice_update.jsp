@@ -7,7 +7,7 @@
 	Notice_DAO dao = new Notice_DAO();
 	
 	int sizeLimit = 1024 * 1024 * 1;
-	String file_dir = CommonUtil.file_dir_notice;;
+	String file_dir = CommonUtil.file_dir_notice;
 	
 	MultipartRequest mpr = new MultipartRequest(request,file_dir,sizeLimit,"UTF-8");
 

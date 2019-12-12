@@ -226,15 +226,22 @@ public class News_DAO {
     return i;
   }
   public int updateNews(String news_no,String title,String content,String reg_id,String reg_date,String file_name_1) {
-    String str = " update a20_track2_web_news "+
+    String query = "";
+	if(!file_name_1.equals("null")){
+		query = " update a20_track2_web_news "+
 				" set title = '" + title + "', content = '" + content + "', "+
 				" reg_id = '" + reg_id + "', reg_date = '" + reg_date + "', file_name_1 = '"+file_name_1+"' "+
 				" where news_no = '" + news_no + "' ";
-    
+    } else {
+		query = " update a20_track2_web_news "+
+				" set title = '" + title + "', content = '" + content + "', "+
+				" reg_id = '" + reg_id + "', reg_date = '" + reg_date + "', file_name_1 = null "+
+				" where news_no = '" + news_no + "' ";
+	}
     int i = 0;
     try {
       this.con = this.common.getConnection();
-      this.ps = this.con.prepareStatement(str);
+      this.ps = this.con.prepareStatement(query);
       i = this.ps.executeUpdate();
     }
     catch (RemoteException remoteException) {
