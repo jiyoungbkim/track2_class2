@@ -71,7 +71,7 @@
 		<!-- sub page start -->
 		<div class="notice">
 			<div class="sub-notice">
-			<h2><span><i class="fas fa-edit"></i> FAQ-write</span></h2>	
+			<h2><span><i class="fas fa-edit"></i> FAQ-update</span></h2>	
 			</div>
 			
 			<div class="notice-write">

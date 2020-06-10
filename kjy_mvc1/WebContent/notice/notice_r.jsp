@@ -27,7 +27,7 @@
 	int			total_page;						// 총페이지 수
 	int			total_count;					// 총레코드 수
 	int			for_count;						
-	int			list_setup_count = 3;			// 한번에 출력될 List 수
+	int			list_setup_count = 5;			// 한번에 출력될 List 수
 	int			p_no;
 	int			v_count;
 	int			a_count;
